@@ -30,7 +30,7 @@ Credit full to [Gozargah Marzban](https://github.com/Gozargah), saya hanya edit 
  ```
 Pastikan anda sudah login sebagai root sebelum menjalankan perintah dibawah
  ```html
- wget https://raw.githubusercontent.com/broc65/marzws/main/mar.sh && chmod +x mar.sh && ./mar.sh
+ wget https://raw.githubusercontent.com/broc65/marzws/main/install.sh && chmod +x install.sh && ./install.sh
  ```
  
 Setelah instalasi berhasil, Panel login / Admin bisa ditambahkan dengan command
