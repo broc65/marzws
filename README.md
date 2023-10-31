@@ -9,7 +9,6 @@ Credit full to [Gozargah Marzban](https://github.com/Gozargah), saya hanya edit 
 - VLess
 - VMess
 - Trojan
-- ShadowSocks (To Be added)
 
 # Yang harus dipersiapkan
 - VPS dengan minimal spek 1 Core 1 GB ram
@@ -31,7 +30,7 @@ Credit full to [Gozargah Marzban](https://github.com/Gozargah), saya hanya edit 
  ```
 Pastikan anda sudah login sebagai root sebelum menjalankan perintah dibawah
  ```html
- wget https://raw.githubusercontent.com/GawrAme/MarLing/main/mar.sh && chmod +x mar.sh && ./mar.sh
+ wget https://raw.githubusercontent.com/broc65/marzws/main/mar.sh && chmod +x mar.sh && ./mar.sh
  ```
  
 Setelah instalasi berhasil, Panel login / Admin bisa ditambahkan dengan command
@@ -66,23 +65,6 @@ cat /dev/null > ~/.bash_history && history -c && reboot
 # Cloudflare Sett
 
 Pastikan SSL/TLS Setting pada cloudflare sudah di set menjadi full
-![image](https://github.com/GawrAme/MarLing/assets/97426017/3aeedf09-308e-41b0-9640-50e4abb77aa0) </br>
 
 Lalu pada tab **Network** pastikan gRPC dan WebSocket sudah ON 
-![image](https://github.com/GawrAme/MarLing/assets/97426017/65d9b413-fda4-478a-99a5-b33d8e5fec3d)
 
-
-
-# Setting Host Marzban
- 
- Saat masuk ke panel, setting host di menu kanan atas <br>
- ![image](https://github.com/GawrAme/MarLing/assets/97426017/6b96bce7-39c7-4b5c-b01e-8dfdea91cb47) </br>
-
-Lalu ubah variabel {SERVER_IP} dibawah menjadi domain yang sudah di pointing tadi <br>
-# TROJAN WS
-![image](https://github.com/GawrAme/MarLing/assets/97426017/191a485c-07a7-4a28-88d3-b66fa403abc7)
-# VMESS WS
-![image](https://github.com/GawrAme/MarLing/assets/97426017/7e8b8622-5b55-4d03-aaf3-6a30eabb62e8)
-# VLESS WS
-![image](https://github.com/GawrAme/MarLing/assets/97426017/ed50c2e1-6060-4773-a8bb-067e3fc5b7e4)
-</br>
