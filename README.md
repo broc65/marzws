@@ -30,9 +30,9 @@
 - Debian 10 </br>
 - Debian 11 </br>
 - Debian 12 </br>
-- Ubuntu 18.04 </br>
-- Ubuntu 20.04 </br>
-- Ubuntu 22.04 </br>
+- Ubuntu 20 </br>
+- Ubuntu 22 </br>
+- Ubuntu 23 </br>
 
 # Instalasi
   ```html
