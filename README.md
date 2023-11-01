@@ -1,25 +1,38 @@
-# Marzban+nginx
-Ini adalah [Marzban](https://github.com/Gozargah/Marzban) yang sudah saya tambahkan nginx untuk konfigurasi WebSocket single port. </br>
-WebSocket sudah support untuk 443 TLS, 80 HTTP dan Wildcard path, contoh /enter-your-custom-path/trojan </br>
+</p> 
+<h2 align="center"> Marzban + Nginx </h2>
 
-# List Protocol yang support
-- VLess
-- VMess
-- Trojan
+<p align="center"><img src="https://d33wubrfki0l68.cloudfront.net/5911c43be3b1da526ed609e9c55783d9d0f6b066/9858b/assets/img/debian-ubuntu-hover.png"></p> 
+
+</p>
+</div>
+
+|  SERVICE  |  NETWORK PORT  |
+|---------- |--------|
+| Vmess WS TLS | 443 |
+| Vless WS TLS  | 443 |
+| Trojan WS TLS  | 443 |
+| Vmess WS | 80 |
+| Vless WS  | 80 |
+| Trojan WS  | 80 |
+| Vmess gRPC  | 443 |
+| Vless gRPC  | 443 |
+| Trojan gRPC  | 443 |
+| Wildcard Path  | bug.com/vmess-ws 
+| |bug.com/vless-ws |
+| |bug.com/trojan-ws|
 
 # Yang harus dipersiapkan
-- VPS dengan minimal spek 1 Core 1 GB ram
+- VPS minimal 1 Core 1 GB ram
+- root akses vps
 - Domain yang sudah di pointing ke CloudFlare
-- Pemahaman dasar perintah Linux
 
 # Sistem VM yang dapat digunakan
-- Debian 10 [**RECOMMENDED**]</br>
+- Debian 10 </br>
 - Debian 11 </br>
+- Debian 12 </br>
 - Ubuntu 18.04 </br>
 - Ubuntu 20.04 </br>
 - Ubuntu 22.04 </br>
-
-
 
 # Instalasi
   ```html
@@ -59,9 +72,7 @@ Jangan lupa, setiap selesai instalasi diharapkan reboot server nya satu kali den
 ```html
 cat /dev/null > ~/.bash_history && history -c && reboot
  ```
-# Cloudflare Sett
 
-Pastikan SSL/TLS Setting pada cloudflare sudah di set menjadi full
-
-Lalu pada tab **Network** pastikan gRPC dan WebSocket sudah ON 
-
+# Setting Host Panel Marzban 
+Saat masuk panel, setting host pada bagian kanan atas. <br> 
+![image](https://github.com/broc65/marzws/blob/main/set-host.png)
