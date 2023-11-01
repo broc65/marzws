@@ -1,25 +1,30 @@
-</p> 
-<h2 align="center"> Marzban + Nginx </h2>
+<h2 align="center">
+<hr>
+Marzban + Nginx 
+</h2><hr>
+  
+<p align="center"><img src="https://img.shields.io/badge/Service-Multiport-blue"> <img src="https://img.shields.io/badge/Service-Multipath-blue"></p>
 
-<p align="center"><img src="https://d33wubrfki0l68.cloudfront.net/5911c43be3b1da526ed609e9c55783d9d0f6b066/9858b/assets/img/debian-ubuntu-hover.png"></p> 
-<p align="center"><img src="https://img.shields.io/badge/Service-Multiport (XRAY)-orange"><img src="https://img.shields.io/badge/Service-Multipath (XRAY)-orange"></p>
 </p>
 </div>
 
-|  SERVICE  |  NETWORK PORT  |
-|---------- |--------|
-| Vmess WS TLS | 443 |
-| Vless WS TLS  | 443 |
-| Trojan WS TLS  | 443 |
-| Vmess WS | 80 |
-| Vless WS  | 80 |
-| Trojan WS  | 80 |
-| Vmess gRPC  | 443 |
-| Vless gRPC  | 443 |
-| Trojan gRPC  | 443 |
-| Wildcard Path  | bug.com/vmess-ws 
-| |bug.com/vless-ws |
-| |bug.com/trojan-ws|
+|  SERVICE | NETWORK PORT |
+|---------------|---------------|
+| VMess WS | 80 |
+| VLess WS | 80 |
+| TRojan WS | 80 |
+| VMess WS TLS | 443 |
+| VLess WS TLS | 443 |
+| TRojan WS TLS | 443 |
+| VMess gRPC | 443 |
+| VLess gRPC | 443 |
+| TRojan gRPC | 443 |
+
+| SERVICE | WILDCARD PATH |
+|---------------|---------------|
+| VMess | bug.com/vmess-ws |
+| VLess | bug.com/vless-ws |
+| TRojan | bug.com/trojan-ws |
 
 # Yang harus dipersiapkan
 - VPS minimal 1 Core 1 GB ram
