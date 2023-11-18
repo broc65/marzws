@@ -8,3 +8,4 @@ services:
     - /etc/timezone:/etc/timezone:ro
     - /etc/localtime:/etc/localtime:ro
     - /var/lib/marzban:/var/lib/marzban
+    - /opt/marzban/index.html:/code/app/templates/subscription/index.html
