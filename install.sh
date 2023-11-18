@@ -67,6 +67,9 @@ chmod +x /usr/bin/cekservice
 #install compose
 wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/broc65/marzws/main/docker-compose.yml"
 
+#subscription marzban
+wget -O /opt/marzban/index.html "https://raw.githubusercontent.com/broc65/marzws/main/index.html"
+
 #Install VNSTAT
 apt -y install vnstat
 /etc/init.d/vnstat restart
