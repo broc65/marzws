@@ -74,8 +74,8 @@ wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/broc6
 wget -O /opt/marzban/index.html "https://raw.githubusercontent.com/broc65/marzws/main/index.html"
 
 #install clear log
-wget https://github.com/broc65/marzws/raw/main/clear.sh
-chmod 755 ~/clear.sh
+wget -O /usr/bin/clearlog "https://github.com/broc65/marzws/raw/main/clear.sh"
+chmod +x /usr/bin/clearlog
 
 #Install VNSTAT
 apt -y install vnstat
