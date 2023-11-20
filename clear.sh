@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 rm -rf /var/log/*.log
 rm -rf /var/log/*.1
 rm -rf /var/log/*.gz
