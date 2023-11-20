@@ -134,6 +134,7 @@ wget -O /var/lib/marzban/db.sqlite3 "https://github.com/broc65/marzws/raw/main/d
 
 #finishing
 apt autoremove -y
+systemctl restart nginx
+rm /root/install.sh
 apt clean
 marzban restart
-rm /root/install.sh
