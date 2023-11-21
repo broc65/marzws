@@ -64,8 +64,8 @@ echo -e 'profile' >> /root/.profile
 wget -O /usr/bin/profile "https://raw.githubusercontent.com/broc65/marzws/main/profile";
 chmod +x /usr/bin/profile
 apt install neofetch -y
-wget -O /usr/bin/cekservice "https://raw.githubusercontent.com/broc65/marzws/main/cekservice.sh"
-chmod +x /usr/bin/cekservice
+wget -O /usr/bin/cek-service "https://raw.githubusercontent.com/broc65/marzws/main/cek-service"
+chmod +x /usr/bin/cek-service
 
 #install compose
 wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/broc65/marzws/main/docker-compose.yml"
@@ -74,8 +74,8 @@ wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/broc6
 wget -O /opt/marzban/index.html "https://raw.githubusercontent.com/broc65/marzws/main/index.html"
 
 #install clear log
-wget -O /usr/bin/clearlog "https://github.com/broc65/marzws/raw/main/clear.sh"
-chmod +x /usr/bin/clearlog
+wget -O /usr/bin/clear-log "https://github.com/broc65/marzws/raw/main/clear-log"
+chmod +x /usr/bin/clear-log
 
 #Install VNSTAT
 apt -y install vnstat
