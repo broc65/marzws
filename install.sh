@@ -51,7 +51,7 @@ apt-get install libio-socket-inet6-perl libsocket6-perl libcrypt-ssleay-perl lib
 timedatectl set-timezone Asia/Jakarta;
 
 #Install Marzban
-sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install
+sudo bash -c "$(curl -sL https://github.com/broc65/Marzban-scripts/raw/master/marzban.sh)" @ install
 
 #install env
 wget -O /opt/marzban/.env "https://raw.githubusercontent.com/broc65/marzws/main/env"
@@ -135,7 +135,7 @@ wget -O /var/lib/marzban/db.sqlite3 "https://github.com/broc65/marzws/raw/main/d
 
 #finishing
 apt autoremove -y
+apt clean
 systemctl restart nginx
 rm /root/install.sh
-apt clean
 marzban restart
