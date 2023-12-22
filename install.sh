@@ -6,9 +6,6 @@ read -rp "Masukkan Domain: " domain
 echo "$domain" > /root/domain
 domain=$(cat /root/domain)
 
-#email
-read -rp "Masukkan Email anda: " email
-
 #Preparation
 clear
 cd;
@@ -114,9 +111,9 @@ apt install socat cron bash-completion -y
 
 #install cert
 systemctl stop nginx
-curl https://get.acme.sh | sh -s email=$email
-/root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /var/lib/marzban/xray.crt --keypath /var/lib/marzban/xray.key --ecc
+curl https://get.acme.sh | sh
+cd .acme.sh
+bash acme.sh --issue -d $domain --server letsencrypt --keylength ec-256 --fullchain-file /var/lib/marzban/xray.crt --key-file /var/lib/marzban/xray.key --standalone --force
 systemctl start nginx
 wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/broc65/marzws/main/xray_config.json"
 
