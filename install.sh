@@ -140,12 +140,13 @@ cd /opt/marzban
 docker compose down && docker compose up -d
 cd
 rm /root/install.sh
+clear
 
-echo -e '\e[32;1m============================================================\e[0m'
-echo -e '\e[0;32m                  Installation Success!                     \e[0m'
-echo -e '\e[32;1m============================================================\e[0m'
+echo -e "\e[32;1m============================================================\e[0m"
+echo -e "\e[0;32m                   Installation Success!                    \e[0m"
+echo -e "\e[32;1m============================================================\e[0m"
 sleep 3
-echo -e "\e[33;1m[ WARNING ] reboot now ? (Y/N)\e[0m"
+echo -e "\e[33;1m===============[ WARNING ] reboot now ? (Y/N)===============\e[0m"
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
