@@ -136,6 +136,11 @@ wget -O /var/lib/marzban/db.sqlite3 "https://github.com/broc65/marzws/raw/main/d
 #finishing
 apt autoremove -y
 apt clean
-systemctl restart nginx
 rm /root/install.sh
-marzban restart
+echo -e "[ WARNING ] reboot now ? (Y/N)"
+read answer
+if [ "$answer" == "${answer#[Yy]}" ] ;then
+exit 0
+else
+reboot
+fi
