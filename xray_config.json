@@ -35,7 +35,7 @@
   },
   "inbounds": [
     {
-      "tag": "TROJAN_WS", 
+      "tag": "TROJAN WS", 
       "listen": "127.0.0.1",
       "port": 3001,
       "protocol": "trojan",
@@ -59,7 +59,7 @@
       }
     },
     {
-      "tag": "VMESS_WS",
+      "tag": "VMESS WS",
       "listen": "127.0.0.1",
       "port": 3002,
       "protocol": "vmess",
@@ -83,7 +83,7 @@
       }
     },
     {
-      "tag": "VLESS_WS",
+      "tag": "VLESS WS",
       "listen": "127.0.0.1",
       "port": 3003,
       "protocol": "vless",
@@ -108,7 +108,7 @@
       }
     },
     {
-      "tag": "TROJAN_GRPC",
+      "tag": "TROJAN gRPC",
       "listen": "127.0.0.1",
       "port": 4001,
       "protocol": "trojan",
@@ -132,7 +132,7 @@
       }
     },
 	{
-      "tag": "VMESS_GRPC",
+      "tag": "VMESS gRPC",
       "listen": "127.0.0.1",
       "port": 4002,
       "protocol": "vmess",
@@ -156,7 +156,7 @@
       }
     },
     {
-      "tag": "VLESS_GRPC",
+      "tag": "VLESS gRPC",
       "listen": "127.0.0.1",
       "port": 4003,
       "protocol": "vless",
