@@ -101,7 +101,7 @@ wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/broc65/mar
 wget -O /etc/nginx/conf.d/xray.conf "https://raw.githubusercontent.com/broc65/marzws/main/xray.conf"
 systemctl enable nginx
 mkdir -p /var/www/html
-echo "<pre>Kurangi Colimu</pre>" > /var/www/html/index.html
+echo "<pre>Don't be sad; indeed Allah is with us</pre>" > /var/www/html/index.html
 systemctl start nginx
 
 #install socat
