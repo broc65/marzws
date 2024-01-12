@@ -43,7 +43,7 @@ echo -e "❇️ Nginx                :  $NGINX"
 echo -e "❇️ Firewall             :  $UFW"
 echo -e "❇️ Marzban Panel        :  $MARZ"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "\E[44;1;39m     » Don't be sad; indeed Allah is with us «               \E[0m"
+echo -e "\E[44;1;39m   » Don't be sad; indeed Allah is with us «    \E[0m"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 echo ""
 
