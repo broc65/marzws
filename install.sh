@@ -57,9 +57,8 @@ sudo bash -c "$(curl -sL https://github.com/broc65/Marzban-scripts/raw/master/ma
 wget -O /opt/marzban/.env "https://raw.githubusercontent.com/broc65/marzws/main/env"
 
 #profile
-echo -e 'profile' >> /root/.profile
-wget -O /usr/bin/profile "https://raw.githubusercontent.com/broc65/marzws/main/profile";
-chmod +x /usr/bin/profile
+echo -e 'clear' >> /root/.profile
+echo -e 'neofetch --ascii_distro Arcolinux_small' >> /root/.profile
 apt install neofetch -y
 wget -O /usr/bin/cek-service "https://raw.githubusercontent.com/broc65/marzws/main/cek-service"
 chmod +x /usr/bin/cek-service
