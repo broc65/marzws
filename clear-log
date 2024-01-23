@@ -1,3 +1,5 @@
 #!/bin/bash
+rm -rf /var/log/nginx/*.1
+rm -rf /var/log/nginx/*.gz
 echo -n > /var/log/nginx/access.log
 echo -n > /var/lib/marzban/access.log
