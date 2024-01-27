@@ -1,6 +1,6 @@
 <h2 align="center">
 <hr>
-Marzban + Nginx 
+Chocolatos
 </h2><hr>
   
 <p align="center"><img src="https://img.shields.io/badge/Service-Multiport-blue"> <img src="https://img.shields.io/badge/Service-Multipath-blue"></p>
