@@ -10,9 +10,9 @@ Chocolatos
 
 |  SERVICE | NETWORK PORT |
 |---------------|---------------|
-| VMess WS | 80 |
-| VLess WS | 80 |
-| TRojan WS | 80 |
+| VMess WS nTLS | 80 |
+| VLess WS nTLS | 80 |
+| TRojan WS nTLS | 80 |
 | VMess WS TLS | 443 |
 | VLess WS TLS | 443 |
 | TRojan WS TLS | 443 |
