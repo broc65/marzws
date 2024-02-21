@@ -113,13 +113,21 @@
       "port": 4001,
       "protocol": "trojan",
       "settings": {
-        "clients": []
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": 8081
+          }
+	]
       },
       "streamSettings": { 
         "network": "grpc",
         "security": "none",
         "grpcSettings": {
-          "serviceName": "trojan-grpc"
+          "serviceName": "trojan-grpc",
+          "acceptProxyProtocol": true,
+          "multiMode": true
         }
       },
       "sniffing": {
@@ -137,13 +145,21 @@
       "port": 4002,
       "protocol": "vmess",
       "settings": {
-        "clients": []
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": 8081
+          }
+	]
       },
       "streamSettings": {
         "network": "grpc",
         "security": "none",
         "grpcSettings": {
-          "serviceName": "vmess-grpc"
+          "serviceName": "vmess-grpc",
+          "acceptProxyProtocol": true,
+          "multiMode": true
         }
       },
       "sniffing": {
@@ -162,13 +178,20 @@
       "protocol": "vless",
       "settings": {
         "clients": [],
-        "decryption": "none"
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": 8081
+          }
+	]
       },
       "streamSettings": {
         "network": "grpc",
         "security": "none",
         "grpcSettings": {
-          "serviceName": "vless-grpc"
+          "serviceName": "vless-grpc",
+          "acceptProxyProtocol": true,
+          "multiMode": true
         }
       },
       "sniffing": {
