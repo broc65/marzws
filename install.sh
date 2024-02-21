@@ -57,9 +57,20 @@ sudo bash -c "$(curl -sL https://github.com/broc65/Marzban-scripts/raw/master/ma
 wget -O /opt/marzban/.env "https://raw.githubusercontent.com/broc65/marzws/main/env"
 
 #profile
-echo -e 'clear' >> /root/.profile
-echo -e 'neofetch --ascii_distro Arcolinux_small' >> /root/.profile
 apt install neofetch -y
+cat > /root/.profile << END
+if [ "$BASH" ]; then
+if [ -f ~/.bashrc ]; then
+. ~/.bashrc
+fi
+fi
+mesg n || true
+clear
+neofetch --ascii_distro Arcolinux_small
+END
+chmod 644 /root/.profile
+
+#cek-service
 wget -O /usr/bin/cek-service "https://raw.githubusercontent.com/broc65/marzws/main/cek-service"
 chmod +x /usr/bin/cek-service
 
@@ -111,6 +122,7 @@ apt install socat cron bash-completion -y
 #install cert
 systemctl stop nginx
 curl https://get.acme.sh | sh
+source ~/.bashrc
 cd .acme.sh
 bash acme.sh --issue -d $domain --server letsencrypt --keylength ec-256 --fullchain-file /var/lib/marzban/xray.crt --key-file /var/lib/marzban/xray.key --standalone --force
 systemctl start nginx
@@ -140,12 +152,12 @@ docker compose down && docker compose up -d
 cd
 rm /root/install.sh
 clear
-
-echo -e "\e[32;1m============================================================\e[0m"
-echo -e "\e[0;32m                   Installation Success!                    \e[0m"
-echo -e "\e[32;1m============================================================\e[0m"
-sleep 3
-echo -e "\e[33;1m===============[ WARNING ] reboot now ? (Y/N)===============\e[0m"
+echo ""
+echo -e "\033[96m_______________________________\033[0m"
+echo -e "\033[92m         INSTALL SUCCES\033[0m"
+echo -e "\033[96m_______________________________\033[0m"
+sleep 2
+echo -e "\e[33;1m[ WARNING ] reboot now ? (Y/N)\e[0m"
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
