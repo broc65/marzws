@@ -4,7 +4,6 @@ sfile="https://github.com/broc65/marzws/blob/main"
 #domain
 read -rp "Masukkan Domain: " domain
 echo "$domain" > /root/domain
-domain=$(cat /root/domain)
 
 #Preparation
 clear
@@ -121,6 +120,7 @@ apt install socat cron bash-completion -y
 
 #install cert
 systemctl stop nginx
+domain=$(cat /root/domain)
 curl https://get.acme.sh | sh
 source ~/.bashrc
 cd .acme.sh
