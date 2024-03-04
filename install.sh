@@ -108,9 +108,7 @@ rm /etc/nginx/conf.d/default.conf
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/broc65/marzws/main/nginx.conf"
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/broc65/marzws/main/vps.conf"
 wget -O /etc/nginx/conf.d/xray.conf "https://raw.githubusercontent.com/broc65/marzws/main/xray.conf"
-#systemctl enable nginx
-#mkdir -p /var/www/html
-#echo "<h1>Don't be sad; indeed Allah is with us</h1>" > /var/www/html/index.html
+mv /var/www/html/index.nginx-debian.html /var/www/html/index.html
 systemctl start nginx
 
 #install socat
@@ -125,7 +123,7 @@ curl https://get.acme.sh | sh
 source ~/.bashrc
 cd .acme.sh
 bash acme.sh --issue -d $domain --server letsencrypt --keylength ec-256 --fullchain-file /var/lib/marzban/xray.crt --key-file /var/lib/marzban/xray.key --standalone --force
-systemctl start nginx
+systemctl restart nginx
 wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/broc65/marzws/main/xray_config.json"
 
 #install firewall
