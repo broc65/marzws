@@ -154,7 +154,7 @@ echo ""
 echo -e "\033[96m_______________________________\033[0m"
 echo -e "\033[92m         INSTALL SUCCES\033[0m"
 echo -e "\033[96m_______________________________\033[0m"
-sleep 2
+sleep 1
 echo -e "\e[33;1m[ WARNING ] reboot now ? (Y/N)\e[0m"
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
