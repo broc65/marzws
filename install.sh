@@ -5,6 +5,9 @@ sfile="https://github.com/broc65/marzws/blob/main"
 read -rp "Masukkan Domain: " domain
 echo "$domain" > /root/domain
 
+#email
+read -rp "Masukkan Email anda: " email
+
 #Preparation
 clear
 cd;
@@ -117,13 +120,12 @@ apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dns
 apt install socat cron bash-completion -y
 
 #install cert
-systemctl stop nginx
 domain=$(cat /root/domain)
-curl https://get.acme.sh | sh
-source ~/.bashrc
-cd .acme.sh
-bash acme.sh --issue -d $domain --server letsencrypt --keylength ec-256 --fullchain-file /var/lib/marzban/xray.crt --key-file /var/lib/marzban/xray.key --standalone --force
-systemctl restart nginx
+systemctl stop nginx
+curl https://get.acme.sh | sh -s email=$email
+/root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email --issue -d $domain --standalone -k ec-256
+~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /var/lib/marzban/xray.crt --keypath /var/lib/marzban/xray.key --ecc
+systemctl start nginx
 wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/broc65/marzws/main/xray_config.json"
 
 #install firewall
@@ -142,6 +144,11 @@ yes | sudo ufw enable
 #install database
 wget -O /var/lib/marzban/db.sqlite3 "https://github.com/broc65/marzws/raw/main/db.sqlite3"
 
+#swap ram 1gb
+wget https://raw.githubusercontent.com/Cretezy/Swap/master/swap.sh -O swap
+sh swap 2G
+rm swap
+
 #finishing
 apt autoremove -y
 apt clean
@@ -149,6 +156,7 @@ cd /opt/marzban
 docker compose down && docker compose up -d
 cd
 rm /root/install.sh
+
 clear
 echo ""
 echo -e "\033[96m_______________________________\033[0m"
