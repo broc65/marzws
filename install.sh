@@ -7,7 +7,6 @@ echo "$domain" > /root/domain
 
 #email
 read -rp "Masukkan Email anda: " email
-echo "$email" > /root/email
 
 #Preparation
 clear
