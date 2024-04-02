@@ -86,6 +86,20 @@ wget -O /opt/marzban/index.html "https://raw.githubusercontent.com/broc65/marzws
 wget -O /usr/bin/clear-log "https://github.com/broc65/marzws/raw/main/clear-log"
 chmod +x /usr/bin/clear-log
 
+#install auto backup
+apt install pip -y
+rm /usr/lib/python3.*/EXTERNALLY-MANAGED
+pip install python-telegram-bot
+wget -O /usr/bin/backup-m.py ""https://github.com/broc65/marzws/raw/main/backup-m.py"
+
+#crontab
+crontab -l > mycron
+echo "*/3 * * * * /usr/bin/clear-log" >> mycron
+echo "14 3 * * * /sbin/shutdown -r now" >> mycron
+echo "21 3 * * * /usr/bin/python3 /usr/bin/backup-m.py" >> mycron
+crontab mycron
+rm mycron
+
 #Install VNSTAT
 apt -y install vnstat
 /etc/init.d/vnstat restart
