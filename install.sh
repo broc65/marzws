@@ -90,7 +90,7 @@ chmod +x /usr/bin/clear-log
 apt install pip -y
 rm /usr/lib/python3.*/EXTERNALLY-MANAGED
 pip install python-telegram-bot
-wget -O /usr/bin/backup-m.py ""https://github.com/broc65/marzws/raw/main/backup-m.py"
+wget -O /usr/bin/backup-m.py "https://github.com/broc65/marzws/raw/main/backup-m.py"
 
 #crontab
 crontab -l > mycron
