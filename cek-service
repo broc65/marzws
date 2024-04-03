@@ -1,5 +1,6 @@
 #!/bin/bash
-
+clear
+neofetch --ascii_distro Arcolinux_small
 # // Code for service
 export RED='\033[0;31m';
 export GREEN='\033[0;32m';
@@ -35,7 +36,6 @@ else
     UFW="${RED}OFF${NC}";
 fi
 
-echo ""
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 echo -e "\E[44;1;39m            » Service Information «             \E[0m"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
