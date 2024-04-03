@@ -166,7 +166,7 @@ rm swap
 #finishing
 apt autoremove -y
 apt clean
-systemctl restart nginx
+systemctl restart nginx.service
 cd /opt/marzban
 docker compose down && docker compose up -d
 cd
