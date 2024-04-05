@@ -94,7 +94,7 @@ wget -O /usr/bin/backup-m.py "https://github.com/broc65/marzws/raw/main/backup-m
 
 #crontab
 crontab -l > mycron
-echo "*/3 * * * * /usr/bin/clear-log" >> mycron
+echo "5 0 * * * /usr/bin/clear-log" >> mycron
 echo "14 3 * * * /sbin/shutdown -r now" >> mycron
 echo "21 3 * * * /usr/bin/python3 /usr/bin/backup-m.py" >> mycron
 crontab mycron
