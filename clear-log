@@ -3,5 +3,5 @@ rm -rf /var/log/apt/*.log
 rm -rf /var/log/apt/*.xz
 rm -rf /var/log/nginx/*.1
 rm -rf /var/log/nginx/*.gz
-echo > /var/log/nginx/access.log
-echo > /var/lib/marzban/access.log
+echo > /var/log/nginx/*.log
+echo > /var/lib/marzban/*.log
