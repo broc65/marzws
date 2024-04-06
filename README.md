@@ -33,7 +33,7 @@ Chocolatos
 
 # Sistem VM yang dapat digunakan
 - Debian 10 </br>
-- Debian 11 </br>
+- Debian 11 [**RECOMMENDED**] </br>
 - Debian 12 </br>
 - Ubuntu 20 </br>
 - Ubuntu 22 </br>
