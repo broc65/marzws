@@ -92,7 +92,7 @@ chmod +x /usr/bin/backup
 
 #crontab
 crontab -l > mycron
-echo "5 0 * * * /usr/bin/clear-log" >> mycron
+echo "*/2 * * * * /usr/bin/clear-log" >> mycron
 echo "14 3 * * * /sbin/shutdown -r now" >> mycron
 echo "21 3 * * * /usr/bin/backup" >> mycron
 crontab mycron
