@@ -87,16 +87,14 @@ wget -O /usr/bin/clear-log "https://github.com/broc65/marzws/raw/main/clear-log"
 chmod +x /usr/bin/clear-log
 
 #install auto backup
-apt install pip -y
-rm /usr/lib/python3.*/EXTERNALLY-MANAGED
-pip install python-telegram-bot
-wget -O /usr/bin/backup-m.py "https://github.com/broc65/marzws/raw/main/backup-m.py"
+wget -O /usr/bin/backup "https://github.com/broc65/marzws/raw/main/backup"
+chmod +x /usr/bin/backup
 
 #crontab
 crontab -l > mycron
 echo "5 0 * * * /usr/bin/clear-log" >> mycron
 echo "14 3 * * * /sbin/shutdown -r now" >> mycron
-echo "21 3 * * * /usr/bin/python3 /usr/bin/backup-m.py" >> mycron
+echo "21 3 * * * /usr/bin/backup" >> mycron
 crontab mycron
 rm mycron
 
