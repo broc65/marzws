@@ -1,7 +1,7 @@
 DOCKER_COMPOSE_PATH="/opt/marzban"
 BACKUP_DIR="/root/backups"
-DATE="$(date +%d%m%Y-%H%M%S)"
-FILE_NAME="NAME-01-$DATE"
+DATE="$(date +%d%m%Y-%H%M)"
+FILE_NAME="ABC01-$DATE"
 
 # Telegram settings
 CHAT_ID="1799509652"
