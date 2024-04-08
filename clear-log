@@ -6,7 +6,7 @@ rm -rf /var/log/apt/*.log
 rm -rf /var/log/apt/*.xz
 rm -rf /var/log/nginx/*.1
 rm -rf /var/log/nginx/*.gz
-echo > /var/log/nginx/access.log
-echo > /var/log/nginx/error.log
-echo > /var/lib/marzban/access.log
-echo > /var/lib/marzban/error.log
+echo -n > /var/log/nginx/access.log
+echo -n > /var/log/nginx/error.log
+echo -n > /var/lib/marzban/access.log
+echo -n > /var/lib/marzban/error.log
