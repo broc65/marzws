@@ -166,18 +166,19 @@ rm swap
 #finishing
 apt autoremove -y
 apt clean
-systemctl restart nginx.service
 cd /opt/marzban
 docker compose down && docker compose up -d
 cd
 rm /root/install.sh
+systemctl restart nginx
+systemctl restart ufw
 
 clear
 echo ""
 echo -e "\033[96m_______________________________\033[0m"
 echo -e "\033[92m         INSTALL SUCCES\033[0m"
 echo -e "\033[96m_______________________________\033[0m"
-sleep 1
+sleep 1.5
 echo -e "\e[33;1m[ WARNING ] reboot now ? (Y/N)\e[0m"
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
