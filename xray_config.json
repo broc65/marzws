@@ -214,7 +214,7 @@
             "streamSettings": {
                 "network": "httpupgrade",
                 "httpupgradeSettings": {
-                    "path": "/tr-upgrade"
+                    "path": "/trojan-hu"
                 }
             },
             "sniffing": {
@@ -238,7 +238,7 @@
             "streamSettings": {
                 "network": "httpupgrade",
                 "httpupgradeSettings": {
-                    "path": "/vm-upgrade"
+                    "path": "/vmess-hu"
                 }
             },
             "sniffing": {
@@ -262,7 +262,7 @@
             "streamSettings": {
                 "network": "httpupgrade",
                 "httpupgradeSettings": {
-                    "path": "/vl-upgrade"
+                    "path": "/vless-hu"
                 }
             },
             "sniffing": {
