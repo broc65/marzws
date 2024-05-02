@@ -34,7 +34,7 @@
     },
     "inbounds": [  
         {
-            "tag": "VLESS_REALITY",
+            "tag": "VLESS_REALITY_TCP",
             "listen": "0.0.0.0",
             "port": 8443,
             "protocol": "vless",
@@ -48,11 +48,14 @@
                 "security": "reality",
                 "realitySettings": {
                     "show": false,
-                    "dest": "shopee.co.id:443",
+                    "dest": "cf.shopee.co.id:443",
                     "xver": 0,
                     "serverNames": [
-                        "shopee.co.id",
-                        "discordapp.com"
+                        "cf.shopee.co.id",
+                        "shopeemobile.com",
+                        "cvs-deo.shopeemobile.com",
+                        "free.facebook.com",
+                        "ads.ruangguru.com"
                     ],
                     "privateKey": "MMX7m0Mj3faUstoEm5NBdegeXkHG6ZB78xzBv2n3ZUA",
                     "shortIds": [
