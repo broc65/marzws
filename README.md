@@ -10,21 +10,24 @@ Chocolatos
 
 |  SERVICE | NETWORK PORT |
 |---------------|---------------|
-| VMess WS nTLS | 80 |
-| VLess WS nTLS | 80 |
-| TRojan WS nTLS | 80 |
-| VMess WS TLS | 443 |
-| VLess WS TLS | 443 |
-| TRojan WS TLS | 443 |
+| VMess WS | 443, 80 |
+| VLess WS | 443, 80 |
+| Trojan WS | 443 |
+| VMess HU | 443, 80 |
+| VLess HU | 443, 80 |
+| Trojan HU | 443 |
 | VMess gRPC | 443 |
 | VLess gRPC | 443 |
 | TRojan gRPC | 443 |
 
 | SERVICE | WILDCARD PATH |
 |---------------|---------------|
-| VMess | bug.com/vmess-ws |
-| VLess | bug.com/vless-ws |
-| TRojan | bug.com/trojan-ws |
+| VMess WS | bug.com/vmess-ws |
+| VLess WS | bug.com/vless-ws |
+| TRojan WS | bug.com/trojan-ws |
+| VMess HU | bug.com/vmess-hu |
+| VLess HU | bug.com/vless-hu |
+| TRojan HU | bug.com/trojan-hu |
 
 # Yang harus dipersiapkan
 - VPS minimal 1 Core 1 GB ram
