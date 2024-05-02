@@ -51,11 +51,22 @@
                     "dest": "cf.shopee.co.id:443",
                     "xver": 0,
                     "serverNames": [
+                        "shopee.co.id",
                         "cf.shopee.co.id",
                         "shopeemobile.com",
                         "cvs-deo.shopeemobile.com",
+                        "talkgadget.google.com",
+                        "z-p15.www.instagram.com",
+                        "graph.instagram.com",
                         "free.facebook.com",
-                        "ads.ruangguru.com"
+                        "token-media-vidio-com.akamaized.net",
+                        "ads-interfaces.sc-cdn.net",
+                        "play.mobilelegends.com",
+                        "layanan.ruangguru.com",
+                        "ads.ruangguru.com",
+                        "open.spotify.com",
+                        "geo2.ggpht.com",
+                        "zoom.us"
                     ],
                     "privateKey": "MMX7m0Mj3faUstoEm5NBdegeXkHG6ZB78xzBv2n3ZUA",
                     "shortIds": [
