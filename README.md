@@ -12,10 +12,10 @@ Chocolatos
 |---------------|---------------|
 | VMess WS | 443, 80 |
 | VLess WS | 443, 80 |
-| Trojan WS | 443 |
+| Trojan WS | 443, 80 |
 | VMess HU | 443, 80 |
 | VLess HU | 443, 80 |
-| Trojan HU | 443 |
+| Trojan HU | 443, 80 |
 | VMess gRPC | 443 |
 | VLess gRPC | 443 |
 | TRojan gRPC | 443 |
