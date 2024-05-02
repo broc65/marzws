@@ -32,7 +32,43 @@
             }
         ]
     },
-    "inbounds": [
+    "inbounds": [  
+        {
+            "tag": "VLESS_REALITY",
+            "listen": "0.0.0.0",
+            "port": 8443,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "reality",
+                "realitySettings": {
+                    "show": false,
+                    "dest": "shopee.co.id:443",
+                    "xver": 0,
+                    "serverNames": [
+                        "shopee.co.id",
+                        "discordapp.com"
+                    ],
+                    "privateKey": "MMX7m0Mj3faUstoEm5NBdegeXkHG6ZB78xzBv2n3ZUA",
+                    "shortIds": [
+                        "6ba85179e30d4fc2"
+                    ]
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
         {
             "tag": "TROJAN_WS",
             "listen": "127.0.0.1",
