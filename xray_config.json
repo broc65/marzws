@@ -157,7 +157,6 @@
             },
             "streamSettings": {
                 "network": "grpc",
-                "security": "none",
                 "grpcSettings": {
                     "serviceName": "trojan-grpc",
                     "acceptProxyProtocol": true,
@@ -180,7 +179,6 @@
             "protocol": "vmess",
             "settings": {
                 "clients": [],
-                "decryption": "none",
                 "fallbacks": [
                     {
                         "dest": 8081
@@ -243,11 +241,11 @@
             "port": 5001,
             "protocol": "trojan",
             "settings": {
-                "clients": [],
-                "decryption": "none"
+                "clients": []
             },
             "streamSettings": {
                 "network": "httpupgrade",
+                "security": "none",
                 "httpupgradeSettings": {
                     "path": "/trojan-hu"
                 }
@@ -267,11 +265,11 @@
             "port": 5002,
             "protocol": "vmess",
             "settings": {
-                "clients": [],
-                "decryption": "none"
+                "clients": []
             },
             "streamSettings": {
                 "network": "httpupgrade",
+                "security": "none",
                 "httpupgradeSettings": {
                     "path": "/vmess-hu"
                 }
@@ -296,6 +294,7 @@
             },
             "streamSettings": {
                 "network": "httpupgrade",
+                "security": "none",
                 "httpupgradeSettings": {
                     "path": "/vless-hu"
                 }
