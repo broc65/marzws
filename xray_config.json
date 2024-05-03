@@ -157,6 +157,7 @@
             },
             "streamSettings": {
                 "network": "grpc",
+                "security": "none",
                 "grpcSettings": {
                     "serviceName": "trojan-grpc",
                     "acceptProxyProtocol": true,
