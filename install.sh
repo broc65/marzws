@@ -101,7 +101,7 @@ crontab mycron
 rm mycron
 
 #Install VNSTAT
-apt -y install vnstat
+apt install vnstat -y
 
 #Install Speedtest
 curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
