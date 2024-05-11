@@ -32,42 +32,7 @@
             }
         ]
     },
-    "inbounds": [  
-        {
-            "tag": "VLESS_REALITY_TCP",
-            "listen": "0.0.0.0",
-            "port": 8443,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "reality",
-                "realitySettings": {
-                    "show": false,
-                    "dest": "shopee.co.id:443",
-                    "xver": 0,
-                    "serverNames": [
-                        "shopee.co.id"
-                    ],
-                    "privateKey": "MMX7m0Mj3faUstoEm5NBdegeXkHG6ZB78xzBv2n3ZUA",
-                    "shortIds": [
-                        "4646"
-                    ]
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "quic"
-                ]
-            }
-        },
+    "inbounds": [ 
         {
             "tag": "TROJAN_WS",
             "listen": "127.0.0.1",
@@ -298,6 +263,41 @@
                 "security": "none",
                 "httpupgradeSettings": {
                     "path": "/vless-hu"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "VLESS_REALITY_TCP",
+            "listen": "0.0.0.0",
+            "port": 8443,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "reality",
+                "realitySettings": {
+                    "show": false,
+                    "dest": "shopee.co.id:443",
+                    "xver": 0,
+                    "serverNames": [
+                        "shopee.co.id"
+                    ],
+                    "privateKey": "MMX7m0Mj3faUstoEm5NBdegeXkHG6ZB78xzBv2n3ZUA",
+                    "shortIds": [
+                        "4646"
+                    ]
                 }
             },
             "sniffing": {
