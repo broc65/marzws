@@ -1,9 +1,8 @@
 #!/bin/bash
-sfile="https://github.com/broc65/marzws/blob/main"
-
 #domain
+mkdir -p /etc/data
 read -rp "Masukkan Domain: " domain
-echo "$domain" > /root/domain
+echo "$domain" > /etc/data/domain
 
 #email
 read -rp "Masukkan Email anda: " email
@@ -122,12 +121,11 @@ apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dns
 apt install socat cron bash-completion -y
 
 #install cert
-domain=$(cat /root/domain)
+domain=$(cat /etc/data/domain)
 systemctl stop nginx
 curl https://get.acme.sh | sh -s email=$email
 /root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email --issue -d $domain --standalone -k ec-256
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /var/lib/marzban/xray.crt --keypath /var/lib/marzban/xray.key --ecc
-systemctl start nginx
 wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/broc65/marzws/main/xray_config.json"
 
 #install firewall
