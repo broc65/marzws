@@ -62,6 +62,9 @@ mkdir -p /var/lib/marzban/core && cd /var/lib/marzban/core
 wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
 unzip Xray-linux-64.zip && rm Xray-linux-64.zip
 cd
+mkdir -p /var/lib/marzban/assets
+wget -O /var/lib/marzban/assets/geosite.dat "https://github.com/rfxcll/v2ray-rules-dat/releases/latest/download/GeoSite.dat"
+wger -O /var/lib/marzban/assets/geoip.dat "https://github.com/rfxcll/v2ray-rules-dat/releases/latest/download/GeoIP.dat"
 
 #profile
 apt install neofetch -y
