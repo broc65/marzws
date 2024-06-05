@@ -146,11 +146,10 @@ sudo ufw default allow outgoing
 sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
-sudo ufw allow 8443
 sudo ufw allow 7879/tcp
 sudo ufw allow 8081/tcp
-sudo ufw allow 1080/tcp
-sudo ufw allow 1080/udp
+sudo ufw allow 8443/tcp
+sudo ufw allow 8443/udp
 yes | sudo ufw enable
 
 #install database
