@@ -1,0 +1,12 @@
+#!/bin/bash
+read -rp "masukan username yang akan dicek: " keyword
+echo -e log ip user $keyword
+tail -200 /var/lib/marzban/access.log | grep $keyword | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq
+sleep 2
+echo -e "\e[33;1m[ WARNING ] cek lagi ? (Y/N)\e[0m"
+read answer
+if [ "$answer" == "${answer#[Yy]}" ] ;then
+exit 0
+else
+cek-login
+fi
