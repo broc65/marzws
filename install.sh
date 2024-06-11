@@ -98,6 +98,10 @@ chmod +x /usr/bin/clear-log
 wget -O /usr/bin/backup "https://github.com/broc65/marzws/raw/main/backup"
 chmod +x /usr/bin/backup
 
+#install cek-ip
+wget -O /usr/bin/cek-login "https://github.com/broc65/marzws/raw/main/cek-login"
+chmod +x /usr/bin/cek-login
+
 #crontab
 crontab -l > mycron
 echo "*/3 * * * * echo -n > /var/log/nginx/access.log" >> mycron
