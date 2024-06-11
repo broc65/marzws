@@ -182,7 +182,7 @@
         {
             "tag": "TROJAN_WS",
             "listen": "127.0.0.1",
-            "port": 3002,
+            "port": 3001,
             "protocol": "trojan",
             "settings": {
                 "clients": []
@@ -286,7 +286,7 @@
         {
             "tag": "VMESS_WS",
             "listen": "127.0.0.1",
-            "port": 3001,
+            "port": 3002,
             "protocol": "vmess",
             "settings": {
                 "clients": []
