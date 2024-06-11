@@ -25,9 +25,6 @@ Chocolatos
 | VMess WS | bug.com/vmess-ws |
 | VLess WS | bug.com/vless-ws |
 | TRojan WS | bug.com/trojan-ws |
-| VMess HU | bug.com/vmess-hu |
-| VLess HU | bug.com/vless-hu |
-| TRojan HU | bug.com/trojan-hu |
 
 # Yang harus dipersiapkan
 - VPS minimal 1 Core 1 GB ram
