@@ -70,7 +70,16 @@
                         "support.zoom.us",
                         "zoom.us",
                         "hwvip.iflix.com",
-                        "pubgmobile.com"
+                        "pubgmobile.com",
+                        "noice.id",
+                        "free.facebook.com",
+                        "graph.facebook.com",
+                        "ads-interfaces.sc-cdn.net",
+                        "ava.game.naver.com",
+                        "df.game.naver.com",
+                        "media.fcgk35-1.fna.whatsapp.net",
+                        "mobilemaps.googleapis.com",
+                        "talkgadget.google.com"
                     ],
                     "privateKey": "MMX7m0Mj3faUstoEm5NBdegeXkHG6ZB78xzBv2n3ZUA",
                     "shortIds": [
