@@ -150,6 +150,8 @@ sudo ufw default allow outgoing
 sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
+sudo ufw allow 1997/tcp
+sudo ufw allow 1998/tcp
 sudo ufw allow 7879/tcp
 sudo ufw allow 8081/tcp
 yes | sudo ufw enable
