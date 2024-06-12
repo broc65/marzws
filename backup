@@ -5,8 +5,8 @@ HOST=$(hostname -s);
 FILE_NAME="$HOST-$DATE"
 
 # Telegram settings
-CHAT_ID="123456789"
-BOT_TOKEN="123456789:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+CHAT_ID="123"
+BOT_TOKEN="123"
 
 # Directories that have to be backed up
 OPT="/opt/marzban"
