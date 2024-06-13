@@ -40,7 +40,13 @@
             "protocol": "vless",
             "settings": {
                 "clients": [],
-                "decryption": "none"
+                "decryption": "none",
+                "fallbacks": [
+                    {
+                        "dest": "8004",
+                        "xver": 1
+                    }
+                ]
             },
             "streamSettings": {
                 "network": "tcp",
@@ -86,6 +92,33 @@
                     "shortIds": [
                         "4646"
                     ]
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "VLESS_REALITY_GRPC",
+            "listen": "127.0.0.1",
+            "port": 8004,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "vless-reality-grpc"
+                },
+                "sockopt": {
+                    "acceptProxyProtocol": true
                 }
             },
             "sniffing": {
