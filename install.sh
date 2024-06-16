@@ -124,9 +124,9 @@ mkdir -p /var/log/nginx
 mkdir -p /var/www/html
 touch /var/log/nginx/access.log
 touch /var/log/nginx/error.log
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/broc65/marzws/main/nginx.conf"
-wget -O /etc/nginx/conf.d/default.conf "https://raw.githubusercontent.com/broc65/marzws/main/vps.conf"
-wget -O /etc/nginx/conf.d/xray.conf "https://raw.githubusercontent.com/broc65/marzws/main/xray.conf"
+wget -O /opt/marzban/nginx.conf "https://raw.githubusercontent.com/broc65/marzws/main/nginx.conf"
+wget -O /opt/marzban/conf.d/default.conf "https://raw.githubusercontent.com/broc65/marzws/main/vps.conf"
+wget -O /opt/marzban/xray.conf "https://raw.githubusercontent.com/broc65/marzws/main/xray.conf"
 wget -O /var/www/html/index.html "https://raw.githubusercontent.com/broc65/marzws/main/nginx.html"
 
 #install socat
