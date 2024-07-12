@@ -78,7 +78,6 @@ mesg n || true
 clear
 neofetch --ascii_distro Arcolinux_small
 END
-chmod 644 /root/.profile
 
 #cek-service
 wget -O /usr/bin/cek-service "https://raw.githubusercontent.com/broc65/marzws/main/cek-service"
@@ -104,8 +103,8 @@ chmod +x /usr/bin/cek-login
 
 #crontab
 crontab -l > mycron
-echo "*/3 * * * * echo -n > /var/log/nginx/access.log" >> mycron
-echo "*/3 * * * * echo -n > /var/lib/marzban/access.log" >> mycron
+echo "*/1 * * * * echo -n > /var/log/nginx/access.log" >> mycron
+echo "*/1 * * * * echo -n > /var/lib/marzban/access.log" >> mycron
 echo "5 0 * * * /usr/bin/clear-log" >> mycron
 echo "12 3 * * * /sbin/shutdown -r now" >> mycron
 echo "21 3 * * * /usr/bin/backup" >> mycron
@@ -157,7 +156,32 @@ yes | sudo ufw enable
 #install database
 wget -O /var/lib/marzban/db.sqlite3 "https://github.com/broc65/marzws/raw/main/db.sqlite3"
 
+#update host marzban config
+apt install sqlite3 -y
+
+cd /var/lib/marzban
+
+# Nama database
+DB_NAME="db.sqlite3"
+
+if [ ! -f "$DB_NAME" ]; then
+  echo "Database $DB_NAME tidak ditemukan!"
+  exit 1
+fi
+
+SQL_QUERY="UPDATE hosts SET address = '$domain' WHERE address = 'domain'; UPDATE hosts SET host = '$domain' WHERE host = 'domain'; UPDATE hosts SET sni = '$domain' WHERE sni = 'domain';"
+
+sqlite3 "$DB_NAME" "$SQL_QUERY"
+
+# Periksa apakah query berhasil dijalankan
+if [ $? -eq 0 ]; then
+  echo "Update berhasil dilakukan."
+else
+  echo "Gagal melakukan update."
+fi
+
 #swap ram 1gb
+cd
 wget https://raw.githubusercontent.com/Cretezy/Swap/master/swap.sh -O swap
 sh swap 2G
 rm swap
@@ -183,5 +207,5 @@ read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
 else
-reboot
+cat /dev/null > ~/.bash_history && history -c && reboot
 fi
