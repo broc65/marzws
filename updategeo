@@ -40,7 +40,6 @@ wget -O /var/lib/marzban/assets/geosite.dat https://github.com/rfxcll/v2ray-rule
 
 # Mengecek apakah unduhan berhasil
 if [ $? -eq 0 ]; then
-    profile
     echo "Berhasil Update Geo"
 else
     echo "Gagal Update Geo"
