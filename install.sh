@@ -66,6 +66,10 @@ mkdir -p /var/lib/marzban/assets
 wget -O /var/lib/marzban/assets/geosite.dat "https://github.com/rfxcll/v2ray-rules-dat/releases/latest/download/GeoSite.dat"
 wget -O /var/lib/marzban/assets/geoip.dat "https://github.com/rfxcll/v2ray-rules-dat/releases/latest/download/GeoIP.dat"
 
+#update-geo
+wget -O /usr/bin/update-geo "https://github.com/broc65/marzws/raw/main/updategeo"
+chmod +x /usr/bin/update-geo
+
 #profile
 apt install neofetch -y
 cat > /root/.profile << END
