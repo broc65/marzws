@@ -270,6 +270,30 @@
             }
         },
         {
+            "tag": "TROJAN_SPLIT",
+            "listen": "127.0.0.1",
+            "port": 6001,
+            "protocol": "trojan",
+            "settings": {
+                "clients": []
+            },
+            "streamSettings": {
+                "network": "splithttp",
+                "security": "none",
+                "splithttpSettings": {
+                    "path": "/trojan-sh"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
             "tag": "TROJAN_GRPC",
             "listen": "127.0.0.1",
             "port": 4001,
@@ -362,6 +386,30 @@
                 "security": "none",
                 "httpupgradeSettings": {
                     "path": "/vmess-hu"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "VMESS_SPLIT",
+            "listen": "127.0.0.1",
+            "port": 6002,
+            "protocol": "vmess",
+            "settings": {
+                "clients": []
+            },
+            "streamSettings": {
+                "network": "splithttp",
+                "security": "none",
+                "splithttpSettings": {
+                    "path": "/vmess-sh"
                 }
             },
             "sniffing": {
@@ -470,6 +518,31 @@
                 "security": "none",
                 "httpupgradeSettings": {
                     "path": "/vless-hu"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "VLESS_SPLIT",
+            "listen": "127.0.0.1",
+            "port": 6003,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "splithttp",
+                "security": "none",
+                "splithttpSettings": {
+                    "path": "/vless-sh"
                 }
             },
             "sniffing": {
