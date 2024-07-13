@@ -6,10 +6,10 @@ import re
 logging.basicConfig(level=logging.INFO)
 
 # Constants
-DOMAIN = 'YOUR_DOMAIN'
-PORT = 'YOUR_PORT'
-USERNAME = 'YOUR_USERNAME'
-PASSWORD = 'YOUR_PASSWORD'
+DOMAIN = 'DOMAIN'
+PORT = '7879'
+USERNAME = 'admin'
+PASSWORD = '@'
 USER_STATUS = 'E'  # Set E for Expired, L for Limited, D for Disabled, A for Active
 HTTPS = True  # Set this to True for HTTPS, False for HTTP
 
