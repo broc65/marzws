@@ -3,7 +3,7 @@
 Chocolatos
 </h2><hr>
   
-<p align="center"><img src="https://img.shields.io/badge/Service-Multiport-blue"> <img src="https://img.shields.io/badge/Service-Multipath-blue"></p>
+<p align="center"><img src="https://img.shields.io/badge/Service-fallback-blue"> <img src="https://img.shields.io/badge/Service-Multipath-blue"></p>
 
 </p>
 </div>
@@ -19,25 +19,38 @@ Chocolatos
 | VMess gRPC | 443 |
 | VLess gRPC | 443 |
 | TRojan gRPC | 443 |
+| VMess TCP | 443 |
+| VLess TCP | 443 |
+| TRojan TCP | 443 |
+| VLess TCP Reality| 443 |
+| VLess gRPC Reality| 443 |
 
-| SERVICE | WILDCARD PATH |
+| SERVICE | DYNAMIC PATH |
 |---------------|---------------|
 | VMess WS | bug.com/vmess-ws |
+| VMess HU | bug.com/vmess-hu |
 | VLess WS | bug.com/vless-ws |
+| VLess HU | bug.com/vless-hu |
 | TRojan WS | bug.com/trojan-ws |
+| TRojan HU | bug.com/trojan-hu |
 
 # Yang harus dipersiapkan
 - VPS minimal 1 Core 1 GB ram
+- 2 GB ram [**RECOMMENDED**] 
 - root akses vps
 - Domain yang sudah di pointing ke CloudFlare
 
+# Cloudflare Sett
+- Pastikan SSL/TLS Setting pada cloudflare sudah di set menjadi full
+- Lalu pada tab **Network** pastikan gRPC dan WebSocket sudah ON
+
 # Sistem VM yang dapat digunakan
-- Debian 10 </br>
 - Debian 11 [**RECOMMENDED**] </br>
 - Debian 12 </br>
 - Ubuntu 20 </br>
 - Ubuntu 22 </br>
 - Ubuntu 23 </br>
+- Ubuntu 24 </br>
 
 # Instalasi
   ```html
@@ -52,7 +65,7 @@ Setelah instalasi berhasil, Panel login / Admin bisa ditambahkan dengan command
 ```html
 marzban cli admin create --sudo
  ```
-Buka panel Marzban dengan mengunjungi https://domainmu/dashboard <br>
+Buka panel Marzban dengan mengunjungi https://domainmu:7879/dashboard <br>
 Username dan Password default panel adalah :
 - Username : admin
 - Password : admin
@@ -73,11 +86,3 @@ Perintah Cek update service Marzban
 ```html
 marzban update
  ```
-Jangan lupa, setiap selesai instalasi diharapkan reboot server nya satu kali dengan memasukkan perintah dibawah
-```html
-cat /dev/null > ~/.bash_history && history -c && reboot
- ```
-
-# Setting Host Panel Marzban 
-Saat masuk panel, setting host pada bagian kanan atas. <br> 
-![image](https://github.com/broc65/marzws/blob/main/set-host.png)
