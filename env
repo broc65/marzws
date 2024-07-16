@@ -33,6 +33,10 @@ XRAY_EXCLUDE_INBOUND_TAGS = "VLESS_TLS VLESSNTLS_FALLBACK"
 
 SQLALCHEMY_DATABASE_URL = "sqlite:////var/lib/marzban/db.sqlite3"
 
+### Use negative values to disable auto-delete by default
+USERS_AUTODELETE_DAYS = 1
+USER_AUTODELETE_INCLUDE_LIMITED_ACCOUNTS = false
+
 ### for developers
 # DOCS=true
 # DEBUG=true
