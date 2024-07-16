@@ -101,9 +101,6 @@ chmod +x /usr/bin/clear-log
 wget -O /usr/bin/backup "https://github.com/broc65/marzws/raw/main/backup"
 chmod +x /usr/bin/backup
 
-#install autodell xp
-wget -O /usr/bin/xp.py "https://github.com/broc65/marzws/raw/main/xp.py"
-
 #install cek-ip
 wget -O /usr/bin/cek-login "https://github.com/broc65/marzws/raw/main/cek-login"
 chmod +x /usr/bin/cek-login
