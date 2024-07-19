@@ -10,12 +10,15 @@ Chocolatos
 
 |  SERVICE | NETWORK PORT |
 |---------------|---------------|
-| VMess WS | 443, 80 |
-| VLess WS | 443, 80 |
-| Trojan WS | 443, 80 |
-| VMess HU | 443, 80 |
-| VLess HU | 443, 80 |
-| Trojan HU | 443, 80 |
+| VMess Websocket | 443, 80 |
+| VLess Websocket | 443, 80 |
+| Trojan Websocket | 443, 80 |
+| VMess HttpUpgrade | 443, 80 |
+| VLess HttpUpgrade | 443, 80 |
+| Trojan HttpUpgrade | 443, 80 |
+| VMess SplitHttp | 443, 80 |
+| VLess SplitHttp | 443, 80 |
+| Trojan SplitHttp | 443, 80 |
 | VMess gRPC | 443 |
 | VLess gRPC | 443 |
 | TRojan gRPC | 443 |
