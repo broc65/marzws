@@ -9,7 +9,7 @@ Chocolatos
 </div>
 
 |  SERVICE | NETWORK PORT |
-|---------------|---------------|
+|-----------------|-----------------|
 | VMess Websocket | 443, 80 |
 | VLess Websocket | 443, 80 |
 | Trojan Websocket | 443, 80 |
@@ -29,13 +29,13 @@ Chocolatos
 | VLess gRPC Reality| 443 |
 
 | SERVICE | DYNAMIC PATH |
-|---------------|---------------|
-| VMess WS | bug.com/vmess-ws |
-| VMess HU | bug.com/vmess-hu |
-| VLess WS | bug.com/vless-ws |
-| VLess HU | bug.com/vless-hu |
-| TRojan WS | bug.com/trojan-ws |
-| TRojan HU | bug.com/trojan-hu |
+|-----------------|-----------------|
+| VMess Websocket | anything/vmess-ws |
+| VMess HttpUpgrade | anything/vmess-hu |
+| VLess Websocket | anything/vless-ws |
+| VLess HttpUpgrade | anything/vless-hu |
+| TRojan Websocket | anything/trojan-ws |
+| TRojan HttpUpgrade | anything/trojan-hu |
 
 # Yang harus dipersiapkan
 - VPS minimal 1 Core 1 GB ram
