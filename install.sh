@@ -123,13 +123,14 @@ curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.
 sudo apt-get install speedtest -y
 
 #install nginx
-apt install nginx -y
-rm /etc/nginx/conf.d/default.conf
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/broc65/marzws/main/nginx.conf"
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/broc65/marzws/main/vps.conf"
-wget -O /etc/nginx/conf.d/xray.conf "https://raw.githubusercontent.com/broc65/marzws/main/xray.conf"
+mkdir -p /var/log/nginx
+touch /var/log/nginx/access.log
+touch /var/log/nginx/error.log
+wget -O /opt/marzban/nginx.conf "https://raw.githubusercontent.com/broc65/marzws/main/nginx.conf"
+wget -O /opt/marzban/default.conf "https://raw.githubusercontent.com/broc65/marzws/main/vps.conf"
+wget -O /opt/marzban/xray.conf "https://raw.githubusercontent.com/broc65/marzws/main/xray.conf"
+mkdir -p /var/www/html
 wget -O /var/www/html/index.html "https://raw.githubusercontent.com/broc65/marzws/main/nginx.html"
-systemctl start nginx
 
 #install socat
 apt install iptables -y
@@ -138,12 +139,10 @@ apt install socat cron bash-completion -y
 
 #install cert
 domain=$(cat /etc/data/domain)
-systemctl stop nginx
 curl https://get.acme.sh | sh -s email=$email
 mkdir -p /var/lib/marzban/certs
 /root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email --issue -d $domain --standalone -k ec-256
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /var/lib/marzban/certs/xray.crt --keypath /var/lib/marzban/certs/xray.key --ecc
-systemctl start nginx
 wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/broc65/marzws/main/xray_config.json"
 
 #install firewall
@@ -197,7 +196,6 @@ cd /opt/marzban
 docker compose down && docker compose up -d
 cd
 rm /root/install.sh
-systemctl restart nginx
 systemctl restart ufw
 
 clear
