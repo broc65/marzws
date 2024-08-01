@@ -86,7 +86,9 @@
                         "token-media-vidio-com.akamaized.net",
                         "media.fcgk35-1.fna.whatsapp.net",
                         "mobilemaps.googleapis.com",
-                        "talkgadget.google.com"
+                        "talkgadget.google.com",
+                        "meetings.googleapis.com",
+                        "meet.google.com"
                     ],
                     "privateKey": "MMX7m0Mj3faUstoEm5NBdegeXkHG6ZB78xzBv2n3ZUA",
                     "shortIds": [
