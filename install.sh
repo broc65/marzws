@@ -111,7 +111,6 @@ crontab -l > mycron
 echo "*/1 * * * * echo -n > /var/log/nginx/access.log" >> mycron
 echo "*/1 * * * * echo -n > /var/lib/marzban/access.log" >> mycron
 echo "5 0 * * * /usr/bin/clear-log" >> mycron
-echo "12 3 * * * /sbin/shutdown -r now" >> mycron
 echo "21 3 * * * /usr/bin/backup" >> mycron
 crontab mycron
 rm mycron
