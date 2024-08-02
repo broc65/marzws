@@ -19,29 +19,49 @@ export PENDING="[${YELLOW} PENDING ${NC}]";
 export SEND="[${YELLOW} SEND ${NC}]";
 export RECEIVE="[${YELLOW} RECEIVE ${NC}]";
 
-# // VAR
-if [[ $(netstat -ntlp | grep -i nginx | grep -i 0.0.0.0:443 | awk '{print $4}' | cut -d: -f2 | xargs | sed -e 's/ /, /g') == '443' ]]; then
-    NGINX="${GREEN}ON${NC}";
+# DOCKER
+if [[ $(systemctl status docker | grep -w Active | awk '{print $2}' | sed 's/(//g' | sed 's/)//g' | sed 's/ //g') == 'active' ]]; then
+    DOCKER="${GREEN}ON${NC}";
 else
-    NGINX="${RED}OFF${NC}";
+    DOCKER="${RED}OFF${NC}";
 fi
+
+# PANEL
 if [[ $(netstat -ntlp | grep -i python | grep -i 0.0.0.0:7879 | awk '{print $4}' | cut -d: -f2 | xargs | sed -e 's/ /, /g') == '7879' ]]; then
-    MARZ="${GREEN}ON${NC}";
+    PANEL="${GREEN}ON${NC}";
 else
-    MARZ="${RED}OFF${NC}";
+    PANEL="${RED}OFF${NC}";
 fi
+
+# UFW
 if [[ $(systemctl status ufw | grep -w Active | awk '{print $2}' | sed 's/(//g' | sed 's/)//g' | sed 's/ //g') == 'active' ]]; then
     UFW="${GREEN}ON${NC}";
 else
     UFW="${RED}OFF${NC}";
 fi
 
+# HTTP
+if [[ $(netstat -ntlp | grep -i xray | grep -i :::80 | awk '{print $4}' | cut -c4-6 | xargs | sed -e 's/ /, /g') == '80' ]]; then
+    HTTP="${GREEN}ON${NC}";
+else
+    HTTP="${RED}OFF${NC}";
+fi
+
+# HTTPS
+if [[ $(netstat -ntlp | grep -i xray | grep -i :::443 | awk '{print $4}' | cut -c4-6 | xargs | sed -e 's/ /, /g') == '443' ]]; then
+    HTTPS="${GREEN}ON${NC}";
+else
+    HTTPS="${RED}OFF${NC}";
+fi
+
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 echo -e "\E[44;1;39m            » Service Information «             \E[0m"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "❇️ Nginx                :  $NGINX"
+echo -e "❇️ HTTP                 :  $HTTP"
+echo -e "❇️ HTTPS                :  $HTTPS"
+echo -e "❇️ Docker               :  $DOCKER"
 echo -e "❇️ Firewall             :  $UFW"
-echo -e "❇️ Marzban Panel        :  $MARZ"
+echo -e "❇️ Marzban Panel        :  $PANEL"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 echo -e "\E[44;1;39m   » Don't be sad; indeed Allah is with us «    \E[0m"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
