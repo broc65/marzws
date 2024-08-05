@@ -584,7 +584,7 @@
             }
         },
         {
-            "tag": "VLESSNTLS_FALLBACK",
+            "tag": "VLESS_NTLS",
             "listen": "0.0.0.0",
             "port": "80",
             "protocol": "vless",
