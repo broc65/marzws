@@ -20,7 +20,7 @@
             {
                 "type": "field",
                 "protocol": [
-                    "bittorent"
+                    "bittorrent"
                 ],
                 "outboundTag": "block"
             },
