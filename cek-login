@@ -12,7 +12,9 @@ if [ -z "$USER_LIST" ]; then
     exit 1
 fi
 
+clear
 # Print updated header
+echo ""
 echo "USER LOGIN INFORMATION"
 echo "=============================="
 echo "=============================="
