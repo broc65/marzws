@@ -3,10 +3,12 @@ BACKUP_DIR="/root/backups"
 DATE="$(date +%d%m%Y-%H%M%S)"
 HOST=$(hostname -s);
 FILE_NAME="$HOST-$DATE"
+CHATID=$(cat /etc/data/chatid)
+TOKEN=$(cat /etc/data/token)
 
 # Telegram settings
-CHAT_ID="123"
-BOT_TOKEN="123"
+CHAT_ID="$TELEID"
+BOT_TOKEN="$TOKET"
 
 # Directories that have to be backed up
 OPT="/opt/marzban"
