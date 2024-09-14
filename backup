@@ -8,7 +8,7 @@ TOKEN=$(cat /etc/data/token)
 
 # Telegram settings
 CHAT_ID="$CHATID"
-BOT_TOKEN="$TOKET"
+BOT_TOKEN="$TOKEN"
 
 # Directories that have to be backed up
 OPT="/opt/marzban"
