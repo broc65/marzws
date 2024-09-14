@@ -62,3 +62,5 @@ for USER in $USER_LIST; do
     # Increment user counter
     USER_COUNT=$((USER_COUNT + 1))
 done
+echo ""
+read -n 1 -s -r -p "Press any key to back"
