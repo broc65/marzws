@@ -1,12 +1,62 @@
 #!/bin/bash
-read -rp "masukan username yang akan dicek: " keyword
-echo -e log ip user $keyword
-tail -200 /var/lib/marzban/access.log | grep $keyword | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq
-sleep 2
-echo -e "\e[33;1m[ WARNING ] cek lagi ? (Y/N)\e[0m"
-read answer
-if [ "$answer" == "${answer#[Yy]}" ] ;then
-exit 0
-else
-cek-login
+# Path to the sqlite database and access log
+DB_PATH="/var/lib/marzban/db.sqlite3"
+LOG_PATH="/var/lib/marzban/access.log"
+
+# Query the SQLite database to get a list of users
+USER_LIST=$(sqlite3 $DB_PATH "SELECT username FROM users;")
+
+# Check if USER_LIST is empty
+if [ -z "$USER_LIST" ]; then
+    echo "No users found in the database."
+    exit 1
 fi
+
+# Print updated header
+echo "USER LOGIN INFORMATION"
+echo "=============================="
+echo "=============================="
+echo ""
+
+# Initialize user counter
+USER_COUNT=1
+
+# Loop through each user from the database
+for USER in $USER_LIST; do
+    # Make the username bold  and add the user number
+    echo -e "\e[1m$USER_COUNT. $USER\e[0m"
+    echo "=============================="  # Thicker separator line
+
+    # Use grep to search for lines in access.log containing the username after "email:" and extract the IP address
+    # Remove the fourth octet from IP addresses
+    IP_LIST=$(grep "$USER" $LOG_PATH | awk '{print $4}' | sed 's/tcp://g' | cut -d':' -f1 | awk -F. '{print $1 "." $2 "." $3 ".xxx"}' | sort | uniq)
+
+    if [ -z "$IP_LIST" ]; then
+        # Print "No IPs found" in red with proper alignment
+        printf "| %-35s |\n" "$(echo -e "\e[31mNo IPs found for this user\e[0m")"
+    else
+        # Initialize table headers with proper alignment
+        printf "| %-3s | %-20s |\n" "No." "IP Address"
+        echo "------------------------------"
+
+        # Initialize counter
+        COUNT=1
+        for IP in $IP_LIST; do
+            # Print the truncated IP in table format with vertical bars
+            printf "| %-3d | %-20s |\n" "$COUNT" "$IP"
+            COUNT=$((COUNT + 1))
+        done
+
+        TOTAL_IPS=$(echo "$IP_LIST" | wc -l)
+        echo "------------------------------"
+
+        # Print total unique IPs in blue with proper alignment
+        printf "| %-35s |\n" "$(echo -e "\e[34m   Total unique IPs: $TOTAL_IPS\e[0m")"
+    fi
+
+    echo "=============================="
+    echo ""
+
+    # Increment user counter
+    USER_COUNT=$((USER_COUNT + 1))
+done
