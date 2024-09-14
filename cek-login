@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 # Path to the sqlite database and access log
 DB_PATH="/var/lib/marzban/db.sqlite3"
 LOG_PATH="/var/lib/marzban/access.log"
@@ -12,11 +13,9 @@ if [ -z "$USER_LIST" ]; then
     exit 1
 fi
 
-clear
 # Print updated header
-echo ""
-echo "USER LOGIN INFORMATION"
 echo "=============================="
+echo -e "\E[44;1;39m  » USER LOGIN INFORMATION «  \E[0m"
 echo "=============================="
 echo ""
 
