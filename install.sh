@@ -3,8 +3,8 @@
 mkdir -p /etc/data
 read -rp "Masukkan Domain: " domain
 echo "$domain" > /etc/data/domain
-read -rp "Masukkan TeleID: " tele
-echo "$tele" > /etc/data/tele
+read -rp "Masukkan ChatID: " chatid
+echo "$chatid" > /etc/data/chatid
 read -rp "Masukkan TokenBot: " token
 echo "$token" > /etc/data/token
 read -rp "Masukkan Email anda: " email
