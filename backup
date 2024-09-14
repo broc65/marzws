@@ -7,7 +7,7 @@ CHATID=$(cat /etc/data/chatid)
 TOKEN=$(cat /etc/data/token)
 
 # Telegram settings
-CHAT_ID="$TELEID"
+CHAT_ID="$CHATID"
 BOT_TOKEN="$TOKET"
 
 # Directories that have to be backed up
