@@ -7,6 +7,8 @@ read -rp "Masukkan ChatID: " chatid
 echo "$chatid" > /etc/data/chatid
 read -rp "Masukkan GroupID: " groupid
 echo "$groupid" > /etc/data/groupid
+read -rp "Masukkan ThreadID: " threadid
+echo "$threadid" > /etc/data/threadid
 read -rp "Masukkan TokenBot: " token
 echo "$token" > /etc/data/token
 read -rp "Masukkan Email anda: " email
