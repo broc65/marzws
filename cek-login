@@ -3,7 +3,7 @@ clear
 # Path to the sqlite database and access log
 DB_PATH="/var/lib/marzban/db.sqlite3"
 LOG_PATH="/var/lib/marzban/access.log"
-CHATID=$(cat /etc/data/chatid)
+CHATID=$(cat /etc/data/groupid)
 THREADID=$(cat /etc/data/threadid)
 TOKEN=$(cat /etc/data/token)
 
