@@ -1,5 +1,5 @@
 #!/bin/bash
-#domain
+#input data
 mkdir -p /etc/data
 read -rp "Masukkan Domain: " domain
 echo "$domain" > /etc/data/domain
@@ -118,6 +118,7 @@ crontab -l > mycron
 echo "*/1 * * * * echo -n > /var/log/nginx/access.log" >> mycron
 echo "*/1 * * * * echo -n > /var/lib/marzban/access.log" >> mycron
 echo "5 0 * * * /usr/bin/clear-log" >> mycron
+echo "*/10 * * * * /usr/bin/cek-login" >> mycron
 echo "21 3 * * * /usr/bin/backup" >> mycron
 crontab mycron
 rm mycron
