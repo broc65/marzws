@@ -50,7 +50,7 @@ send_telegram_notification() {
 ❖  *USER LOGIN ALERT*  ❖
 ◇━━━━━━━━━━━━━━━◇
 ❖ *Server*: **$HOST**
-❖ *Username*: **$USER**
+❖ *Username*: @**$USER**
 ◇━━━❖*Detail  IPs*❖━━━◇
 $IP_WITH_NUMBERS◇━━━━━━━━━━━━━━━◇
 ❖ *Total Unique IPs*: **$TOTAL_IPS**
