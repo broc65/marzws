@@ -101,4 +101,7 @@ for USER in $USER_LIST; do
     USER_COUNT=$((USER_COUNT + 1))
 done
 
+    echo -n > /var/log/nginx/access.log
+    echo -n > /var/lib/marzban/access.log
+
 read -n 1 -s -r -p "Press any key to back"
