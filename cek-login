@@ -41,9 +41,9 @@ send_telegram_notification() {
 ======================
 🚨 USER LOGIN ALERT 🚨
 ======================
-🖥️VPS: $HOST
-🙊User: $USER
-📊Total IPs: $TOTAL_IPS
+❖ VPS : $HOST
+❖ User : $USER
+❖ Total IPs : $TOTAL_IPS
 =======Detail IP========
 $IP_LIST
 ======================"
