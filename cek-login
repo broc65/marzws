@@ -96,9 +96,21 @@ for USER in $USER_LIST; do
         # Print total unique IPs in blue with proper alignment
         printf "| %-35s |\n" "$(echo -e "\e[34mTotal unique IPs: $TOTAL_IPS\e[0m")"
 
-        # Check if total IPs is greater than 3 and send notification
+	# EXCLUDED_USERS
+	EXCLUDED_USERS=("admin")
+	is_user_excluded() {
+	  for user in "${EXCLUDED_USERS[@]}"; do
+	    if [[ "$USER" == "$1" ]]; then
+	      return 0
+	    fi
+	  done
+	  return 1
+	}
+    # Check if total IPs is greater than 3 and send notification
         if [ "$TOTAL_IPS" -gt 3 ]; then
+	  if ! is_user_excluded "admin"; then
             send_telegram_notification "$USER" "$TOTAL_IPS" "$IP_LIST"
+	    fi
         fi
     fi
 
