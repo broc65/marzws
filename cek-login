@@ -106,8 +106,8 @@ for USER in $USER_LIST; do
 	  done
 	  return 1
 	}
-    # Check if total IPs is greater than 3 and send notification
-        if [ "$TOTAL_IPS" -gt 3 ]; then
+    # Check if total IPs is greater than 4 and send notification
+        if [ "$TOTAL_IPS" -gt 4 ]; then
 	  if ! is_user_excluded "admin"; then
             send_telegram_notification "$USER" "$TOTAL_IPS" "$IP_LIST"
 	    fi
