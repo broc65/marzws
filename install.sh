@@ -116,8 +116,8 @@ chmod +x /usr/bin/cek-login
 #crontab
 crontab -l > mycron
 
-echo "*/2 * * * * echo -n > /var/lib/marzban/access.log" >> mycron
-echo "*/2 * * * * echo -n > /var/log/nginx/access.log" >> mycron
+echo "*/3 * * * * echo -n > /var/lib/marzban/access.log" >> mycron
+echo "*/3 * * * * echo -n > /var/log/nginx/access.log" >> mycron
 echo "*/13 * * * * /usr/bin/cek-login" >> mycron
 echo "5 0 * * * /usr/bin/clear-log" >> mycron
 echo "21 3 * * * /usr/bin/backup" >> mycron
