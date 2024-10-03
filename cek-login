@@ -71,7 +71,8 @@ for USER in $USER_LIST; do
     echo "=============================="
 
     # Use grep to search for lines in access.log containing the username after "email:" and extract the IP address
-    IP_LIST=$(grep "$USER" $LOG_PATH | awk '{print $4}' | sed 's/tcp://g' | cut -d':' -f1 | sort | uniq)
+    # Remove the fourth octet from IP addresses
+    IP_LIST=$(grep "$USER" $LOG_PATH | awk '{print $4}' | sed 's/tcp://g' | cut -d':' -f1 | awk -F. '{print $1 "." $2 "." $3 ".xxx"}' | sort | uniq)
 
     if [ -z "$IP_LIST" ]; then
         # Print "No IPs found" in red with proper alignment
@@ -105,8 +106,8 @@ for USER in $USER_LIST; do
 	  done
 	  return 1
 	}
-    # Check if total IPs is greater than 4 and send notification
-        if [ "$TOTAL_IPS" -gt 4 ]; then
+    # Check if total IPs is greater than 2 and send notification
+        if [ "$TOTAL_IPS" -gt 2 ]; then
 	  if ! is_user_excluded "admin"; then
             send_telegram_notification "$USER" "$TOTAL_IPS" "$IP_LIST"
 	    fi
