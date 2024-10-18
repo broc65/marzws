@@ -15,6 +15,12 @@
         "rules": [
             {
                 "type": "field",
+                "port": "443",
+                "network": "udp",
+                "outboundTag": "block"
+            },
+            {
+                "type": "field",
                 "protocol": [
                     "bittorrent"
                 ],
