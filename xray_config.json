@@ -647,13 +647,5 @@
             },
             "tag": "dns-out"
         }
-    ],
-    "policy": {
-        "levels": {
-            "0": {
-                "handshake": 2,
-                "connIdle": 120
-            }
-        }
-    }
+    ]
 }
