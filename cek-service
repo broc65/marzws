@@ -34,7 +34,7 @@ else
 fi
 
 # PANEL
-if [[ $(netstat -ntlp | grep -i python | grep -i 0.0.0.0:7879 | awk '{print $4}' | cut -d: -f2 | xargs | sed -e 's/ /, /g') == '7879' ]]; then
+if [[ $(netstat -ntlp | grep -i python | grep -i 127.0.0.1:7879 | awk '{print $4}' | cut -d: -f2 | xargs | sed -e 's/ /, /g') == '7879' ]]; then
     PANEL="${GREEN}ON${NC}";
 else
     PANEL="${RED}OFF${NC}";
