@@ -19,42 +19,42 @@ export PENDING="[${YELLOW} PENDING ${NC}]";
 export SEND="[${YELLOW} SEND ${NC}]";
 export RECEIVE="[${YELLOW} RECEIVE ${NC}]";
 
-# DOCKER
+# // DOCKER
 if [[ $(systemctl status docker | grep -w Active | awk '{print $2}' | sed 's/(//g' | sed 's/)//g' | sed 's/ //g') == 'active' ]]; then
     DOCKER="${GREEN}ON${NC}";
 else
     DOCKER="${RED}OFF${NC}";
 fi
 
-# UFW
+# // UFW
 if [[ $(systemctl status ufw | grep -w Active | awk '{print $2}' | sed 's/(//g' | sed 's/)//g' | sed 's/ //g') == 'active' ]]; then
     UFW="${GREEN}ON${NC}";
 else
     UFW="${RED}OFF${NC}";
 fi
 
-# PANEL
+# // PANEL
 if [[ $(netstat -ntlp | grep -i python | grep -i 127.0.0.1:7879 | awk '{print $4}' | cut -d: -f2 | xargs | sed -e 's/ /, /g') == '7879' ]]; then
     PANEL="${GREEN}ON${NC}";
 else
     PANEL="${RED}OFF${NC}";
 fi
 
-#NGINX
-if [[ $(netstat -ntlp | grep -i nginx | grep -i 0.0.0.0:8081 | awk '{print $4}' | cut -d: -f2 | xargs | sed -e 's/ /, /g') == '8081' ]]; then
-    NGINX="${GREEN}ON${NC}";
+# // NGINX
+if [[ $(docker inspect --format '{{.State.Status}}' marzban-nginx-1) == "running" ]]; then
+    NGINX="${GREEN}ON${NC}"
 else
-    NGINX="${RED}OFF${NC}";
+    NGINX="${RED}OFF${NC}"
 fi
 
-# HTTP
+# // HTTP
 if [[ $(netstat -ntlp | grep -i xray | grep -i :::80 | awk '{print $4}' | cut -c4-6 | xargs | sed -e 's/ /, /g') == '80' ]]; then
     HTTP="${GREEN}ON${NC}";
 else
     HTTP="${RED}OFF${NC}";
 fi
 
-# HTTPS
+# // HTTPS
 if [[ $(netstat -ntlp | grep -i xray | grep -i :::443 | awk '{print $4}' | cut -c4-6 | xargs | sed -e 's/ /, /g') == '443' ]]; then
     HTTPS="${GREEN}ON${NC}";
 else
