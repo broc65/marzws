@@ -20,14 +20,14 @@ export SEND="[${YELLOW} SEND ${NC}]";
 export RECEIVE="[${YELLOW} RECEIVE ${NC}]";
 
 # // DOCKER
-if [[ $(systemctl status docker | grep -w Active | awk '{print $2}' | sed 's/(//g' | sed 's/)//g' | sed 's/ //g') == 'active' ]]; then
+if systemctl is-active --quiet docker; then
     DOCKER="${GREEN}ON${NC}";
 else
     DOCKER="${RED}OFF${NC}";
 fi
 
 # // UFW
-if [[ $(systemctl status ufw | grep -w Active | awk '{print $2}' | sed 's/(//g' | sed 's/)//g' | sed 's/ //g') == 'active' ]]; then
+if systemctl is-active --quiet ufw; then
     UFW="${GREEN}ON${NC}";
 else
     UFW="${RED}OFF${NC}";
