@@ -30,6 +30,7 @@
                     "geosite:youtube"
                 ],
                 "outboundTag": "direct"
+            },
             {
                 "type": "field",
                 "inboundTag": [
@@ -685,7 +686,7 @@
                     "headers": {
                         "Host": "domain.com"
                     },
-                    "path": "/vless-ws"
+                    "path": "/vless"
                 }
             },
             "tag": "routing1"
