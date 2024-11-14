@@ -26,6 +26,12 @@
             },
             {
                 "type": "field",
+                "domain": [
+                    "geosite:youtube"
+                ],
+                "outboundTag": "direct"
+            {
+                "type": "field",
                 "inboundTag": [
                     "dns-in"
                 ],
@@ -637,6 +643,52 @@
             "protocol": "blackhole",
             "settings": {},
             "tag": "block"
+        },
+        {
+            "mux": {
+                "concurrency": -1,
+                "enabled": false,
+                "xudpConcurrency": 8,
+                "xudpProxyUDP443": ""
+            },
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "domain.com",
+                        "port": 443,
+                        "users": [
+                            {
+                                "encryption": "none",
+                                "flow": "",
+                                "id": "8d6ecc3d-ab59-4f5d-9251-2e9f2d6b2923",
+                                "level": 8,
+                                "security": "auto"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "tls",
+                "tlsSettings": {
+                    "allowInsecure": true,
+                    "fingerprint": "",
+                    "publicKey": "",
+                    "serverName": "domain.com",
+                    "shortId": "",
+                    "show": false,
+                    "spiderX": ""
+                },
+                "wsSettings": {
+                    "headers": {
+                        "Host": "domain.com"
+                    },
+                    "path": "/vless-ws"
+                }
+            },
+            "tag": "routing1"
         },
         {
             "protocol": "dns",
