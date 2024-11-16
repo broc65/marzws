@@ -127,6 +127,7 @@ rm mycron
 
 #Install VNSTAT
 apt install vnstat -y
+apt -y install libsqlite3-dev
 
 #Install Speedtest
 curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
