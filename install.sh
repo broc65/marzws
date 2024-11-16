@@ -152,7 +152,7 @@ apt install socat cron bash-completion -y
 domain=$(cat /etc/data/domain)
 curl https://get.acme.sh | sh -s email=$email
 mkdir -p /var/lib/marzban/certs
-/root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email --issue -d $domain --standalone -k ec-256 --debug
+/root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email --issue -d $domain --standalone -k ec-256
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /var/lib/marzban/certs/xray.crt --keypath /var/lib/marzban/certs/xray.key --ecc
 wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/broc65/marzws/main/xray_config.json"
 
