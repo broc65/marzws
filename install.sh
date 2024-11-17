@@ -156,10 +156,11 @@ domain2=$(cat /etc/data/domain2)
 curl https://get.acme.sh | sh -s email=$email
 mkdir -p /var/lib/marzban/certs/domain1
 mkdir -p /var/lib/marzban/certs/domain2
-/root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email --issue -d $domain1 --standalone -k ec-256
+/root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email
+/root/.acme.sh/acme.sh --issue -d $domain1 --standalone -k ec-256
 ~/.acme.sh/acme.sh --installcert -d $domain1 --fullchainpath /var/lib/marzban/certs/domain1/xray.crt --keypath /var/lib/marzban/certs/domain1/xray.key --ecc
 #cert domain2
-/root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email --issue -d $domain2 --standalone -k ec-256
+/root/.acme.sh/acme.sh --issue -d $domain2 --standalone -k ec-256
 ~/.acme.sh/acme.sh --installcert -d $domain2 --fullchainpath /var/lib/marzban/certs/domain2/xray.crt --keypath /var/lib/marzban/certs/domain2/xray.key --ecc
 wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/broc65/marzws/main/xray_config.json"
 
