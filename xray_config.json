@@ -188,8 +188,14 @@
                     "certificates": [
                         {
                             "ocspStapling": 3600,
-                            "certificateFile": "/var/lib/marzban/certs/xray.crt",
-                            "keyFile": "/var/lib/marzban/certs/xray.key",
+                            "certificateFile": "/var/lib/marzban/certs/domain1/xray.crt",
+                            "keyFile": "/var/lib/marzban/certs/domain1/xray.key",
+                            "usage": "encipherment"
+                        },
+                        {
+                            "ocspStapling": 3600,
+                            "certificateFile": "/var/lib/marzban/certs/domain2/xray.crt",
+                            "keyFile": "/var/lib/marzban/certs/domain2/xray.key",
                             "usage": "encipherment"
                         }
                     ]
