@@ -1,8 +1,10 @@
 #!/bin/bash
 #input data
 mkdir -p /etc/data
-read -rp "Masukkan Domain: " domain
-echo "$domain" > /etc/data/domain
+read -rp "Masukkan Domain1: " domain1
+echo "$domain1" > /etc/data/domain1
+read -rp "Masukkan Domain2: " domain2
+echo "$domain2" > /etc/data/domain2
 read -rp "Masukkan ChatID: " chatid
 echo "$chatid" > /etc/data/chatid
 read -rp "Masukkan GroupID: " groupid
@@ -148,12 +150,17 @@ apt install iptables -y
 apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
 apt install socat cron bash-completion -y
 
-#install cert
-domain=$(cat /etc/data/domain)
+#  install cert
+domain1=$(cat /etc/data/domain1)
+domain2=$(cat /etc/data/domain2)
 curl https://get.acme.sh | sh -s email=$email
-mkdir -p /var/lib/marzban/certs
-/root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /var/lib/marzban/certs/xray.crt --keypath /var/lib/marzban/certs/xray.key --ecc
+mkdir -p /var/lib/marzban/certs/domain1
+mkdir -p /var/lib/marzban/certs/domain2
+/root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email --issue -d $domain1 --standalone -k ec-256
+~/.acme.sh/acme.sh --installcert -d $domain1 --fullchainpath /var/lib/marzban/certs/domain1/xray.crt --keypath /var/lib/marzban/certs/domain1/xray.key --ecc
+#cert domain2
+/root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email --issue -d $domain2 --standalone -k ec-256
+~/.acme.sh/acme.sh --installcert -d $domain2 --fullchainpath /var/lib/marzban/certs/domain2/xray.crt --keypath /var/lib/marzban/certs/domain2/xray.key --ecc
 wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/broc65/marzws/main/xray_config.json"
 
 #install firewall
