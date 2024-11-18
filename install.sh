@@ -150,18 +150,34 @@ apt install iptables -y
 apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
 apt install socat cron bash-completion -y
 
-#  install cert
+# Konfigurasi domain
 domain1=$(cat /etc/data/domain1)
 domain2=$(cat /etc/data/domain2)
-curl https://get.acme.sh | sh -s email=$email
+
+# Konfigurasi path
 mkdir -p /var/lib/marzban/certs/domain1
 mkdir -p /var/lib/marzban/certs/domain2
-/root/.acme.sh/acme.sh --server letsencrypt --register-account -m $email
+
+# Menginstal acme.sh
+curl https://get.acme.sh | sh -s email=$email
+
+# Atur Let's Encrypt sebagai server CA default
+~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+
+# Mendaftarkan akun dan menerbitkan sertifikat untuk domain pertama
+/root/.acme.sh/acme.sh --register-account -m $email
 /root/.acme.sh/acme.sh --issue -d $domain1 --standalone -k ec-256
+
+# Memasang sertifikat untuk domain pertama
 ~/.acme.sh/acme.sh --installcert -d $domain1 --fullchainpath /var/lib/marzban/certs/domain1/xray.crt --keypath /var/lib/marzban/certs/domain1/xray.key --ecc
-#cert domain2
+
+# Mendaftarkan akun dan menerbitkan sertifikat untuk domain kedua
 /root/.acme.sh/acme.sh --issue -d $domain2 --standalone -k ec-256
+
+# Memasang sertifikat untuk domain kedua
 ~/.acme.sh/acme.sh --installcert -d $domain2 --fullchainpath /var/lib/marzban/certs/domain2/xray.crt --keypath /var/lib/marzban/certs/domain2/xray.key --ecc
+
+# Mengunduh file xray.json
 wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/broc65/marzws/main/xray_config.json"
 
 #install firewall
