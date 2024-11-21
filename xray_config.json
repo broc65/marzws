@@ -683,19 +683,19 @@
                     "allowInsecure": true,
                     "fingerprint": "",
                     "publicKey": "",
-                    "serverName": "domain.com",
+                    "serverName": "open.spotify.com",
                     "shortId": "",
                     "show": false,
                     "spiderX": ""
                 },
                 "wsSettings": {
                     "headers": {
-                        "Host": "domain.com"
+                        "Host": "open.spotify.com"
                     },
                     "path": "/vless"
                 }
             },
-            "tag": "routing1"
+            "tag": "routing"
         },
         {
             "protocol": "dns",
