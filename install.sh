@@ -64,7 +64,7 @@ timedatectl set-timezone Asia/Jakarta;
 sudo bash -c "$(curl -sL https://github.com/broc65/Marzban-scripts/raw/master/marzban.sh)" @ install
 
 #install env
-wget -O /opt/marzban/.env "https://raw.githubusercontent.com/broc65/marzws/main/env"
+wget -O /opt/marzban/.env "https://raw.githubusercontent.com/broc65/marzws/main/data/env"
 
 #install latest xray
 mkdir -p /var/lib/marzban/xray-core && cd /var/lib/marzban/xray-core
@@ -78,7 +78,7 @@ mkdir -p /var/lib/marzban/assets
 wget -O /var/lib/marzban/assets/geosite.dat "https://github.com/rfxcll/v2ray-rules-dat/releases/latest/download/GeoSite.dat"
 wget -O /var/lib/marzban/assets/geoip.dat "https://github.com/rfxcll/v2ray-rules-dat/releases/latest/download/GeoIP.dat"
 
-wget -O /usr/bin/update-geo "https://github.com/broc65/marzws/raw/main/updategeo"
+wget -O /usr/bin/update-geo "https://github.com/broc65/marzws/raw/main/other/updategeo"
 chmod +x /usr/bin/update-geo
 
 #profile
@@ -95,25 +95,25 @@ neofetch --ascii_distro Arcolinux_small
 END
 
 #cek-service
-wget -O /usr/bin/cek-service "https://raw.githubusercontent.com/broc65/marzws/main/cek-service"
+wget -O /usr/bin/cek-service "https://raw.githubusercontent.com/broc65/marzws/main/other/cek-service"
 chmod +x /usr/bin/cek-service
 
 #install compose
-wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/broc65/marzws/main/docker-compose.yml"
+wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/broc65/marzws/main/dato/docker-compose.yml"
 
 #install subcription
-wget -O /opt/marzban/index.html "https://raw.githubusercontent.com/broc65/marzws/main/index.html"
+wget -O /opt/marzban/index.html "https://raw.githubusercontent.com/broc65/marzws/main/data/index.html"
 
 #install clear log
-wget -O /usr/bin/clear-log "https://github.com/broc65/marzws/raw/main/clear-log"
+wget -O /usr/bin/clear-log "https://github.com/broc65/marzws/raw/main/other/clear-log"
 chmod +x /usr/bin/clear-log
 
 #install auto backup
-wget -O /usr/bin/backup "https://github.com/broc65/marzws/raw/main/backup"
+wget -O /usr/bin/backup "https://github.com/broc65/marzws/raw/main/other/backup"
 chmod +x /usr/bin/backup
 
 #install cek-ip
-wget -O /usr/bin/cek-login "https://github.com/broc65/marzws/raw/main/cek-login"
+wget -O /usr/bin/cek-login "https://github.com/broc65/marzws/raw/main/other/cek-login"
 chmod +x /usr/bin/cek-login
 
 #crontab
@@ -139,11 +139,11 @@ sudo apt-get install speedtest -y
 mkdir -p /var/log/nginx
 touch /var/log/nginx/access.log
 touch /var/log/nginx/error.log
-wget -O /opt/marzban/nginx.conf "https://raw.githubusercontent.com/broc65/marzws/main/nginx.conf"
-wget -O /opt/marzban/default.conf "https://raw.githubusercontent.com/broc65/marzws/main/vps.conf"
-wget -O /opt/marzban/xray.conf "https://raw.githubusercontent.com/broc65/marzws/main/xray.conf"
+wget -O /opt/marzban/nginx.conf "https://raw.githubusercontent.com/broc65/marzws/main/nginx/nginx.conf"
+wget -O /opt/marzban/default.conf "https://raw.githubusercontent.com/broc65/marzws/main/nginx/vps.conf"
+wget -O /opt/marzban/xray.conf "https://raw.githubusercontent.com/broc65/marzws/main/nginx/xray.conf"
 mkdir -p /var/www/html
-wget -O /var/www/html/index.html "https://raw.githubusercontent.com/broc65/marzws/main/nginx.html"
+wget -O /var/www/html/index.html "https://raw.githubusercontent.com/broc65/marzws/main/nginx/nginx.html"
 
 #install socat
 apt install iptables -y
@@ -178,7 +178,7 @@ curl https://get.acme.sh | sh -s email=$email
 ~/.acme.sh/acme.sh --installcert -d $domain2 --fullchainpath /var/lib/marzban/certs/domain2/xray.crt --keypath /var/lib/marzban/certs/domain2/xray.key --ecc
 
 # Mengunduh file xray.json
-wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/broc65/marzws/main/xray_config.json"
+wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/broc65/marzws/main/data/xray_config.json"
 
 #install firewall
 apt install ufw -y
@@ -192,7 +192,7 @@ sudo ufw allow 8081/tcp
 yes | sudo ufw enable
 
 #install database
-wget -O /var/lib/marzban/db.sqlite3 "https://github.com/broc65/marzws/raw/main/db.sqlite3"
+wget -O /var/lib/marzban/db.sqlite3 "https://github.com/broc65/marzws/raw/main/data/db.sqlite3"
 
 #update host marzban config
 apt install sqlite3 -y
