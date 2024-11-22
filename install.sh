@@ -99,7 +99,7 @@ wget -O /usr/bin/cek-service "https://raw.githubusercontent.com/broc65/marzws/ma
 chmod +x /usr/bin/cek-service
 
 #install compose
-wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/broc65/marzws/main/dato/docker-compose.yml"
+wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/broc65/marzws/main/data/docker-compose.yml"
 
 #install subcription
 wget -O /opt/marzban/index.html "https://raw.githubusercontent.com/broc65/marzws/main/data/index.html"
