@@ -1,53 +1,83 @@
 #!/bin/bash
 
-# Menghapus folder .acme.sh
-rm -rf ~/.acme.sh
+# Set error handling
+set -euo pipefail
+LOG_FILE="/var/log/update_cert.log"
+exec > >(tee -a "$LOG_FILE") 2>&1
 
-# Mematikan layanan Docker Marzban tanpa tampilan log
-echo "Mematikan layanan Docker Marzban..."
-cd /opt/marzban && docker compose down > /dev/null 2>&1
+# Fungsi untuk menangani error
+handle_error() {
+  echo "Terjadi kesalahan pada perintah: $1" >&2
+  echo "Proses gagal. Silakan periksa log untuk detail kesalahan di: $LOG_FILE" >&2
+  exit 1
+}
 
-# Kembali ke home directory
-cd
+# Menangkap kesalahan dan menampilkan pesan sebelum keluar
+trap 'handle_error "Script terhenti secara tak terduga."' ERR
 
-# Konfigurasi domain
+echo "==== Memulai proses pembaruan sertifikat ===="
+
+# Konfigurasi domain dan email
 DOMAIN1=$(cat /etc/data/domain1)
 DOMAIN2=$(cat /etc/data/domain2)
 EMAIL=$(cat /etc/data/email)
 
-# Menginstal acme.sh
+# Pengecekan jika DOMAIN1, DOMAIN2, atau EMAIL kosong
+if [[ -z "$DOMAIN1" || -z "$DOMAIN2" || -z "$EMAIL" ]]; then
+  handle_error "Domain atau email tidak didefinisikan dengan benar. Pastikan file /etc/data/domain1, /etc/data/domain2, dan /etc/data/email ada dan terisi dengan benar."
+fi
+
+# Cek dan buat direktori certs dan subdirektorinya jika tidak ada
+CERTS_DIR="/var/lib/marzban/certs"
+DOMAIN1_DIR="$CERTS_DIR/domain1"
+DOMAIN2_DIR="$CERTS_DIR/domain2"
+
+# Cek dan buat direktori untuk domain1 jika tidak ada
+if [ ! -d "$DOMAIN1_DIR" ]; then
+  echo "Direktori $DOMAIN1_DIR tidak ada. Membuat direktori..."
+  mkdir -p "$DOMAIN1_DIR" || handle_error "Gagal membuat direktori $DOMAIN1_DIR"
+fi
+
+# Cek dan buat direktori untuk domain2 jika tidak ada
+if [ ! -d "$DOMAIN2_DIR" ]; then
+  echo "Direktori $DOMAIN2_DIR tidak ada. Membuat direktori..."
+  mkdir -p "$DOMAIN2_DIR" || handle_error "Gagal membuat direktori $DOMAIN2_DIR"
+fi
+
+# Mematikan layanan Docker Marzban tanpa tampilan log
+echo "Mematikan layanan Docker Marzban..."
+cd /opt/marzban && docker compose down > /dev/null 2>&1 || handle_error "Gagal mematikan layanan Docker Marzban"
+
+# Menginstal acme.sh tanpa progress
 echo "Menginstal acme.sh..."
-curl -s https://get.acme.sh | sh -s email=$EMAIL > /dev/null 2>&1
+curl -s https://get.acme.sh | sh -s email=$EMAIL > /dev/null 2>&1 || handle_error "Gagal menginstal acme.sh"
 
 # Atur Let's Encrypt sebagai server CA default tanpa progress
-~/.acme.sh/acme.sh --set-default-ca --server letsencrypt --quiet
+~/.acme.sh/acme.sh --set-default-ca --server letsencrypt --log-level 0 || handle_error "Gagal mengatur Let's Encrypt sebagai server CA default"
 
-# Mendaftarkan akun dan menerbitkan sertifikat untuk domain pertama
+# Mendaftarkan akun dan menerbitkan sertifikat untuk domain pertama tanpa progress
 echo "Menerbitkan sertifikat untuk domain pertama ($DOMAIN1)..."
-/root/.acme.sh/acme.sh --register-account -m "$EMAIL" --quiet
-/root/.acme.sh/acme.sh --issue -d "$DOMAIN1" --standalone -k ec-256 --quiet
+/root/.acme.sh/acme.sh --register-account -m "$EMAIL" --log-level 0 || handle_error "Gagal mendaftarkan akun untuk domain pertama ($DOMAIN1)"
+/root/.acme.sh/acme.sh --issue -d "$DOMAIN1" --standalone -k ec-256 --force --log-level 0 || handle_error "Gagal menerbitkan sertifikat untuk domain pertama ($DOMAIN1)"
 
 # Memasang sertifikat untuk domain pertama tanpa progress
 echo "Memasang sertifikat untuk domain pertama ($DOMAIN1)..."
 ~/.acme.sh/acme.sh --installcert -d "$DOMAIN1" \
-  --fullchainpath /var/lib/marzban/certs/domain1/xray.crt \
-  --keypath /var/lib/marzban/certs/domain1/xray.key --ecc --quiet
+  --fullchainpath "$DOMAIN1_DIR/xray.crt" \
+  --keypath "$DOMAIN1_DIR/xray.key" --ecc --log-level 0 || handle_error "Gagal memasang sertifikat untuk domain pertama ($DOMAIN1)"
 
-# Mendaftarkan akun dan menerbitkan sertifikat untuk domain kedua
+# Mendaftarkan akun dan menerbitkan sertifikat untuk domain kedua tanpa progress
 echo "Menerbitkan sertifikat untuk domain kedua ($DOMAIN2)..."
-/root/.acme.sh/acme.sh --issue -d "$DOMAIN2" --standalone -k ec-256 --quiet
+/root/.acme.sh/acme.sh --issue -d "$DOMAIN2" --standalone -k ec-256 --force --log-level 0 || handle_error "Gagal menerbitkan sertifikat untuk domain kedua ($DOMAIN2)"
 
 # Memasang sertifikat untuk domain kedua tanpa progress
 echo "Memasang sertifikat untuk domain kedua ($DOMAIN2)..."
 ~/.acme.sh/acme.sh --installcert -d "$DOMAIN2" \
-  --fullchainpath /var/lib/marzban/certs/domain2/xray.crt \
-  --keypath /var/lib/marzban/certs/domain2/xray.key --ecc --quiet
+  --fullchainpath "$DOMAIN2_DIR/xray.crt" \
+  --keypath "$DOMAIN2_DIR/xray.key" --ecc --log-level 0 || handle_error "Gagal memasang sertifikat untuk domain kedua ($DOMAIN2)"
 
 # Menghidupkan kembali layanan Docker Marzban tanpa tampilan log
 echo "Menghidupkan kembali layanan Docker Marzban..."
-cd /opt/marzban && docker compose up -d > /dev/null 2>&1
-
-# Kembali ke home directory
-cd
+cd /opt/marzban && docker compose up -d > /dev/null 2>&1 || handle_error "Gagal menghidupkan layanan Docker Marzban"
 
 echo "Proses pembaruan sertifikat selesai."
