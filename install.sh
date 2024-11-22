@@ -78,8 +78,12 @@ mkdir -p /var/lib/marzban/assets
 wget -O /var/lib/marzban/assets/geosite.dat "https://github.com/rfxcll/v2ray-rules-dat/releases/latest/download/GeoSite.dat"
 wget -O /var/lib/marzban/assets/geoip.dat "https://github.com/rfxcll/v2ray-rules-dat/releases/latest/download/GeoIP.dat"
 
-wget -O /usr/bin/update-geo "https://github.com/broc65/marzws/raw/main/other/updategeo"
+wget -O /usr/bin/update-geo "https://github.com/broc65/marzws/raw/main/other/update-asset"
 chmod +x /usr/bin/update-geo
+
+#update-core
+wget -O /usr/bin/update-core "https://github.com/broc65/marzws/raw/main/other/update-core"
+chmod +x /usr/bin/update-core
 
 #profile
 apt install neofetch -y
