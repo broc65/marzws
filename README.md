@@ -44,13 +44,15 @@ Chocolatos
 - Domain yang sudah di pointing ke CloudFlare
 
 # Cloudflare Sett
-- Pastikan SSL/TLS Setting pada cloudflare sudah di set menjadi full
-- Lalu pada tab **Network** pastikan gRPC dan WebSocket sudah ON
+```
+- SSL/TLS : FULL
+- SSL/TLS Recommender : OFF
+- GRPC : ON
+- WEBSOCKET : ON
+- Always Use HTTPS : OFF
+- UNDER ATTACK MODE : OFF
+```
 
 # Sistem VM yang dapat digunakan
-- Debian 11 [**RECOMMENDED**] </br>
-- Debian 12 </br>
-- Ubuntu 20 </br>
-- Ubuntu 22 </br>
-- Ubuntu 23 </br>
-- Ubuntu 24 </br>
+- Debian 11 above[**RECOMMENDED**] </br>
+- Ubuntu 22 above </br>
