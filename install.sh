@@ -112,6 +112,10 @@ chmod +x /usr/bin/clear-log
 wget -O /usr/bin/backup "https://github.com/broc65/marzws/raw/main/other/backup"
 chmod +x /usr/bin/backup
 
+#install renew cert
+wget -O /usr/bin/cert "https://github.com/broc65/marzws/raw/main/other/cert"
+chmod +x /usr/bin/cert
+
 #install cek-ip
 wget -O /usr/bin/cek-login "https://github.com/broc65/marzws/raw/main/other/cek-login"
 chmod +x /usr/bin/cek-login
