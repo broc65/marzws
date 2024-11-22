@@ -1,0 +1,95 @@
+#!/bin/bash
+
+# Set error handling
+set -euo pipefail
+
+# Log file untuk proses debug
+LOG_FILE="/var/log/update_xray.log"
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+echo "==== Memulai proses pembaruan Xray-core ===="
+
+# Direktori Xray-core
+XRAY_DIR="/var/lib/marzban/xray-core"
+
+# Fungsi untuk mendapatkan daftar rilis terbaru dari GitHub
+get_latest_versions() {
+  curl -s https://api.github.com/repos/XTLS/Xray-core/releases | \
+    grep -Po '"tag_name": "v[0-9]+\.[0-9]+\.[0-9]+"' | \
+    sed -E 's/"tag_name": "([^"]+)"/\1/' | \
+    head -n 5
+}
+
+# Fungsi untuk memilih varian Xray-core
+choose_version() {
+  echo "Pilih versi Xray-core yang ingin diunduh (tekan Enter untuk versi terbaru):"
+
+  # Mendapatkan daftar versi dan menyimpannya ke dalam array
+  if readarray -t VERSIONS < <(get_latest_versions); then
+    local i=1
+    for VERSION in "${VERSIONS[@]}"; do
+      echo "$i) $VERSION"
+      ((i++))
+    done
+  else
+    echo "Gagal mengambil daftar versi dari GitHub."
+    exit 1
+  fi
+
+  echo "$i) Cancel (batalkan proses)"
+  
+  # Membaca pilihan pengguna
+  read -rp "Masukkan pilihan Anda (1-$i atau tekan Enter): " CHOICE
+
+  if [[ -z "$CHOICE" ]]; then
+    # Versi terbaru (default pilihan pertama dari array)
+    VERSION="${VERSIONS[0]}"
+  elif [[ "$CHOICE" -ge 1 && "$CHOICE" -lt $i ]]; then
+    VERSION="${VERSIONS[$CHOICE-1]}"
+  elif [[ "$CHOICE" -eq $i ]]; then
+    echo "Proses dibatalkan oleh pengguna."
+    exit 0
+  else
+    echo "Pilihan tidak valid. Silakan jalankan ulang script."
+    exit 1
+  fi
+}
+
+# Memilih varian Xray-core
+choose_version
+
+# Memastikan variabel VERSION terisi
+if [[ -z "${VERSION:-}" ]]; then
+  echo "Error: Versi Xray-core tidak terdefinisi."
+  exit 1
+fi
+
+# Menghapus direktori Xray-core lama
+if [ -d "$XRAY_DIR" ]; then
+  echo "Menghapus direktori Xray-core lama..."
+  rm -rf "$XRAY_DIR"
+fi
+
+# Membuat direktori baru untuk Xray-core
+echo "Membuat direktori baru untuk Xray-core..."
+mkdir -p "$XRAY_DIR" && cd "$XRAY_DIR"
+
+# Mengunduh versi Xray-core sesuai pilihan tanpa tampilan progress
+echo "Mengunduh Xray-core versi $VERSION..."
+wget -q "https://github.com/XTLS/Xray-core/releases/download/$VERSION/Xray-linux-64.zip"
+
+# Mengekstrak file Xray-core
+echo "Mengekstrak Xray-core..."
+unzip -q Xray-linux-64.zip
+rm -f Xray-linux-64.zip LICENSE README.md *.dat
+
+# Restart layanan Docker Marzban tanpa tampilan log tambahan
+echo "Restart layanan Docker Marzban..."
+cd /opt/marzban
+docker compose down > /dev/null 2>&1
+docker compose up -d --quiet-pull > /dev/null 2>&1
+
+# Kembali ke home directory
+cd || exit
+
+echo "==== Pembaruan Xray-core selesai ===="
