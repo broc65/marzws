@@ -40,28 +40,29 @@ send_telegram_notification() {
     IP_WITH_NUMBERS=""
     COUNT=1
     while IFS= read -r IP; do
-        IP_WITH_NUMBERS+="$COUNT. **$IP**%0A"
+        IP_WITH_NUMBERS+="$COUNT. <b>$IP</b>%0A"
         COUNT=$((COUNT + 1))
     done <<< "$IP_LIST"
 
-    # Format the message using Markdown for bold text and encoded line breaks
+    # Format the message using HTML and %0A for new lines
     MESSAGE="
-◇━━━━━━━━━━━━━━━◇
-❖  *USER LOGIN ALERT*  ❖
-◇━━━━━━━━━━━━━━━◇
-❖ *Server*: **$HOST**
-❖ *Username*: @**$USER**
-◇━━━❖*Detail  IPs*❖━━━◇
-$IP_WITH_NUMBERS◇━━━━━━━━━━━━━━━◇
-❖ *Total Unique IPs*: **$TOTAL_IPS**
-◇━━━━━━━━━━━━━━━◇
+<b>◇━━━━━━━━━━━━━━━◇</b>
+<b>❖ USER LOGIN ALERT ❖</b>
+<b>◇━━━━━━━━━━━━━━━◇</b>
+<b>❖ Server:</b> $HOST
+<b>❖ Username:</b> @$USER
+<b>◇━━━❖ Detail IPs ❖━━━◇</b>
+$IP_WITH_NUMBERS<b>◇━━━━━━━━━━━━━━━◇</b>
+<b>❖ Total Unique IPs:</b> $TOTAL_IPS
+<b>◇━━━━━━━━━━━━━━━◇</b>
 "
+
     # Send the message using Telegram Bot API
     curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
         -d chat_id="$TELEGRAM_CHAT_ID" \
         -d message_thread_id="$THREAD_ID" \
         -d text="$MESSAGE" \
-        -d parse_mode="Markdown"
+        -d parse_mode="HTML"
 }
 
 # Loop through each user from the database
@@ -96,21 +97,21 @@ for USER in $USER_LIST; do
         # Print total unique IPs in blue with proper alignment
         printf "| %-35s |\n" "$(echo -e "\e[34mTotal unique IPs: $TOTAL_IPS\e[0m")"
 
-	# EXCLUDED_USERS
-	EXCLUDED_USERS=("admin")
-	is_user_excluded() {
-	  for user in "${EXCLUDED_USERS[@]}"; do
-	    if [[ "$USER" == "$1" ]]; then
-	      return 0
-	    fi
-	  done
-	  return 1
-	}
-    # Check if total IPs is greater than 4 and send notification
+        # EXCLUDED_USERS
+        EXCLUDED_USERS=("admin")
+        is_user_excluded() {
+          for user in "${EXCLUDED_USERS[@]}"; do
+            if [[ "$USER" == "$1" ]]; then
+              return 0
+            fi
+          done
+          return 1
+        }
+        # Check if total IPs is greater than 4 and send notification
         if [ "$TOTAL_IPS" -gt 4 ]; then
-	  if ! is_user_excluded "admin"; then
+          if ! is_user_excluded "admin"; then
             send_telegram_notification "$USER" "$TOTAL_IPS" "$IP_LIST"
-	    fi
+          fi
         fi
     fi
 
