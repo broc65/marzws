@@ -215,7 +215,7 @@ if [ ! -f "$DB_NAME" ]; then
   exit 1
 fi
 
-SQL_QUERY="UPDATE hosts SET address = '$domain' WHERE address = 'domain'; UPDATE hosts SET host = '$domain' WHERE host = 'domain'; UPDATE hosts SET sni = '$domain' WHERE sni = 'domain';"
+SQL_QUERY="UPDATE hosts SET address = '$domain1' WHERE address = 'domain'; UPDATE hosts SET host = '$domain1' WHERE host = 'domain'; UPDATE hosts SET sni = '$domain1' WHERE sni = 'domain';"
 
 sqlite3 "$DB_NAME" "$SQL_QUERY"
 
