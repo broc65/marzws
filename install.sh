@@ -68,7 +68,7 @@ wget -O /opt/marzban/.env "https://raw.githubusercontent.com/broc65/marzws/main/
 
 #install latest xray
 mkdir -p /var/lib/marzban/xray-core && cd /var/lib/marzban/xray-core
-wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+wget https://github.com/XTLS/Xray-core/releases/download/v24.11.21/Xray-linux-64.zip
 unzip Xray-linux-64.zip && rm Xray-linux-64.zip LICENSE README.md *.dat
 chmod +x xray
 cd
