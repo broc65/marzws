@@ -1,0 +1,45 @@
+UVICORN_HOST = "0.0.0.0"
+UVICORN_PORT = 7879
+
+
+## We highly recommend add admin using `marzban cli` tool and do not use
+## the following variables which is somehow hard codded infrmation.
+# SUDO_USERNAME = "admin"
+# SUDO_PASSWORD = "admin"
+
+# UVICORN_UDS: "/run/marzban.socket"
+# UVICORN_SSL_CERTFILE = "/var/lib/marzban/certs/xray.crt"
+# UVICORN_SSL_KEYFILE = "/var/lib/marzban/certs/xray.key"
+
+
+XRAY_JSON = "/var/lib/marzban/xray_config.json"
+# XRAY_SUBSCRIPTION_URL_PREFIX = "https://"
+XRAY_EXECUTABLE_PATH= "/var/lib/marzban/xray-core/xray"
+XRAY_ASSETS_PATH = "/var/lib/marzban/assets"
+XRAY_FALLBACKS_INBOUND_TAG = "VLESS_REALITY_TCP"
+XRAY_EXCLUDE_INBOUND_TAGS = "VLESS_TLS VLESS_NTLS"
+
+
+# TELEGRAM_API_TOKEN = 
+# TELEGRAM_ADMIN_ID = 
+# TELEGRAM_PROXY_URL = "http://localhost:8080"
+
+
+# CLASH_SUBSCRIPTION_TEMPLATE="clash/my-custom-template.yml"
+# SUBSCRIPTION_PAGE_TEMPLATE="subscription/index.html"
+# HOME_PAGE_TEMPLATE="home/index.html"
+# SUBSCRIPTION_PAGE_LANG="en"
+
+SQLALCHEMY_DATABASE_URL = "sqlite:////var/lib/marzban/db.sqlite3"
+
+### Use negative values to disable auto-delete by default
+USERS_AUTODELETE_DAYS = 1
+USER_AUTODELETE_INCLUDE_LIMITED_ACCOUNTS = false
+
+### for developers
+# DOCS=true
+# DEBUG=true
+# WEBHOOK_ADDRESS = "http://127.0.0.1:9000/"
+# WEBHOOK_SECRET = "something-very-very-secret"
+# VITE_BASE_API="https://example.com/api/"
+JWT_ACCESS_TOKEN_EXPIRE_MINUTES = 0
