@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# Set error handling
+set -euo pipefail
+LOG_FILE="/var/log/update_cert.log"
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+# Fungsi untuk menangani error
+handle_error() {
+  echo "Terjadi kesalahan pada perintah: $1" >&2
+  echo "Proses gagal. Silakan periksa log untuk detail kesalahan di: $LOG_FILE" >&2
+  exit 1
+}
+
+# Menangkap kesalahan dan menampilkan pesan sebelum keluar
+trap 'handle_error "Script terhenti secara tak terduga."' ERR
+
+echo "==== Memulai proses pembaruan sertifikat ===="
+
+# Fungsi untuk meminta domain jika kosong atau tidak ada
+request_domain() {
+  local file=$1
+  local var_name=$2
+  if [[ ! -f "$file" || -z "$(cat "$file")" ]]; then
+    read -rp "Masukkan $var_name: " domain
+    echo "$domain" > "$file"
+  fi
+}
+
+# Memastikan domain1, domain2, dan domain3 ada
+request_domain "/etc/data/domain1" "Domain1"
+request_domain "/etc/data/domain2" "Domain2"
+request_domain "/etc/data/domain3" "Domain3"
+
+# Membaca nilai domain dari file
+DOMAIN1=$(cat /etc/data/domain1)
+DOMAIN2=$(cat /etc/data/domain2)
+DOMAIN3=$(cat /etc/data/domain3)
+
+# Path sertifikat
+CERTS_DIR="/var/lib/marzban/certs"
+DOMAIN1_DIR="$CERTS_DIR/domain1"
+DOMAIN2_DIR="$CERTS_DIR/domain2"
+DOMAIN3_DIR="$CERTS_DIR/domain3"
+
+# Cek dan buat direktori untuk domain jika tidak ada
+for DIR in "$DOMAIN1_DIR" "$DOMAIN2_DIR" "$DOMAIN3_DIR"; do
+  if [ ! -d "$DIR" ]; then
+    echo "Direktori $DIR tidak ada. Membuat direktori..."
+    mkdir -p "$DIR" || handle_error "Gagal membuat direktori $DIR"
+  fi
+done
+
+# Mematikan layanan Docker Marzban tanpa tampilan log
+echo "Mematikan layanan Docker Marzban..."
+cd /opt/marzban && docker compose down > /dev/null 2>&1 || handle_error "Gagal mematikan layanan Docker Marzban"
+
+# Menjalankan perintah acme.sh untuk DOMAIN1
+echo "Menerbitkan sertifikat untuk $DOMAIN1..."
+cd ~/.acme.sh
+bash acme.sh --issue -d "$DOMAIN1" --server letsencrypt --keylength ec-256 \
+  --fullchain-file "$DOMAIN1_DIR/xray.crt" \
+  --key-file "$DOMAIN1_DIR/xray.key" \
+  --standalone --force || handle_error "Gagal menerbitkan sertifikat untuk $DOMAIN1"
+
+# Menjalankan perintah acme.sh untuk DOMAIN2
+echo "Menerbitkan sertifikat untuk $DOMAIN2..."
+bash acme.sh --issue -d "$DOMAIN2" --server letsencrypt --keylength ec-256 \
+  --fullchain-file "$DOMAIN2_DIR/xray.crt" \
+  --key-file "$DOMAIN2_DIR/xray.key" \
+  --standalone --force || handle_error "Gagal menerbitkan sertifikat untuk $DOMAIN2"
+
+# Menjalankan perintah acme.sh untuk DOMAIN3
+echo "Menerbitkan sertifikat untuk $DOMAIN3..."
+bash acme.sh --issue -d "$DOMAIN3" --server letsencrypt --keylength ec-256 \
+  --fullchain-file "$DOMAIN3_DIR/xray.crt" \
+  --key-file "$DOMAIN3_DIR/xray.key" \
+  --standalone --force || handle_error "Gagal menerbitkan sertifikat untuk $DOMAIN3"
+
+# Menghidupkan kembali layanan Docker Marzban tanpa tampilan log
+echo "Menghidupkan kembali layanan Docker Marzban..."
+cd /opt/marzban && docker compose up -d > /dev/null 2>&1 || handle_error "Gagal menghidupkan layanan Docker Marzban"
+
+echo "Proses pembaruan sertifikat selesai."

@@ -1,0 +1,14 @@
+#!/bin/bash
+rm -rf /var/log/*.log
+rm -rf /var/log/*.1
+rm -rf /var/log/*.gz
+rm -rf /var/log/apt/*.log
+rm -rf /var/log/apt/*.xz
+rm -rf /var/log/nginx/*.1
+rm -rf /var/log/nginx/*.gz
+echo > /var/log/syslog
+echo > /var/log/btmp
+echo > /var/log/messages
+echo > /var/log/debug
+echo -n > /var/log/nginx/error.log
+echo -n > /var/lib/marzban/error.log

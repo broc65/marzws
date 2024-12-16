@@ -1,0 +1,133 @@
+#!/bin/bash
+clear
+# Path to the sqlite database and access log
+DB_PATH="/var/lib/marzban/db.sqlite3"
+LOG_PATH="/var/lib/marzban/access.log"
+CHATID=$(cat /etc/data/groupid)
+THREADID=$(cat /etc/data/threadid)
+TOKEN=$(cat /etc/data/token)
+
+# Your Telegram Bot Token and Chat ID
+TELEGRAM_BOT_TOKEN="$TOKEN"
+TELEGRAM_CHAT_ID="$CHATID"
+THREAD_ID="$THREADID"
+HOST=$(hostname -s);
+
+# Query the SQLite database to get a list of users
+USER_LIST=$(sqlite3 $DB_PATH "SELECT username FROM users;")
+
+# Check if USER_LIST is empty
+if [ -z "$USER_LIST" ]; then
+    echo "No users found in the database."
+    exit 1
+fi
+
+# Print updated header
+echo "=============================="
+echo -e "\E[44;1;39m  » USER LOGIN INFORMATION «  \E[0m"
+echo "=============================="
+echo ""
+
+# Initialize user counter
+USER_COUNT=1
+
+# Function to send Telegram notification
+send_telegram_notification() {
+    local USER=$1
+    local TOTAL_IPS=$2
+    local IP_LIST=$3
+    # Add numbering to the IP list with correct line breaks for Telegram
+    IP_WITH_NUMBERS=""
+    COUNT=1
+    while IFS= read -r IP; do
+        IP_WITH_NUMBERS+="$COUNT. <b>$IP</b>%0A"
+        COUNT=$((COUNT + 1))
+    done <<< "$IP_LIST"
+
+    # Format the message using HTML and %0A for new lines
+    MESSAGE="
+<b>◇━━━━━━━━━━━━━━━◇</b>
+<b>❖ USER LOGIN ALERT ❖</b>
+<b>◇━━━━━━━━━━━━━━━◇</b>
+<b>❖ Server:</b> $HOST
+<b>❖ Username:</b> @$USER
+<b>◇━━━❖ Detail IPs ❖━━━◇</b>
+$IP_WITH_NUMBERS<b>◇━━━━━━━━━━━━━━━◇</b>
+<b>❖ Total Unique IPs:</b> $TOTAL_IPS
+<b>◇━━━━━━━━━━━━━━━◇</b>
+"
+
+   # Send the message using Telegram Bot API and capture HTTP status code
+    HTTP_RESPONSE=$(curl -s -w "%{http_code}" -o /dev/null -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+        -d chat_id="$TELEGRAM_CHAT_ID" \
+        -d message_thread_id="$THREAD_ID" \
+        -d text="$MESSAGE" \
+        -d parse_mode="HTML")
+
+    # Check the HTTP response code
+        echo "=============================="
+    if [ "$HTTP_RESPONSE" -eq 200 ]; then
+        echo "Notifikasi berhasil terkirim"
+    else
+        echo "Notifikasi gagal terkirim, HTTP Response: $HTTP_RESPONSE"
+    fi
+}
+# Loop through each user from the database
+for USER in $USER_LIST; do
+    # Make the username bold and add the user number
+    echo -e "\e[1m$USER_COUNT. $USER\e[0m"
+    echo "=============================="
+
+    # Use grep to search for lines in access.log containing the username after "email:" and extract the IP address
+    # Remove the fourth octet from IP addresses
+    IP_LIST=$(grep "$USER" $LOG_PATH | awk '{print $4}' | sed 's/tcp://g' | cut -d':' -f1 | awk -F. '{print $1 "." $2 "." $3 ".xxx"}' | sort | uniq)
+
+    if [ -z "$IP_LIST" ]; then
+        # Print "No IPs found" in red with proper alignment
+        printf "| %-35s |\n" "$(echo -e "\e[31mNo IPs found for this user\e[0m")"
+    else
+        # Initialize table headers with proper alignment
+        printf "| %-3s | %-20s |\n" "No." "IP Address"
+        echo "------------------------------"
+
+        # Initialize counter
+        COUNT=1
+        for IP in $IP_LIST; do
+            # Print the truncated IP in table format with vertical bars
+            printf "| %-3d | %-20s |\n" "$COUNT" "$IP"
+            COUNT=$((COUNT + 1))
+        done
+
+        TOTAL_IPS=$(echo "$IP_LIST" | wc -l)
+        echo "------------------------------"
+
+        # Print total unique IPs in blue with proper alignment
+        printf "| %-35s |\n" "$(echo -e "\e[34mTotal unique IPs: $TOTAL_IPS\e[0m")"
+
+        # EXCLUDED_USERS
+        EXCLUDED_USERS=("admin")
+        is_user_excluded() {
+          for user in "${EXCLUDED_USERS[@]}"; do
+            if [[ "$USER" == "$1" ]]; then
+              return 0
+            fi
+          done
+          return 1
+        }
+        # Check if total IPs is greater than 4 and send notification
+        if [ "$TOTAL_IPS" -gt 4 ]; then
+          if ! is_user_excluded "admin"; then
+            send_telegram_notification "$USER" "$TOTAL_IPS" "$IP_LIST"
+          fi
+        fi
+    fi
+
+    echo "=============================="
+    echo ""
+
+    # Increment user counter
+    USER_COUNT=$((USER_COUNT + 1))
+done
+
+read -n 1 -s -r -p "Press any key to back"
+clear

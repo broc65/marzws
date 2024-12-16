@@ -1,0 +1,42 @@
+DOCKER_COMPOSE_PATH="/opt/marzban"
+BACKUP_DIR="/root/backups"
+DATE="$(date +%d%m%Y-%H%M%S)"
+HOST=$(hostname -s);
+FILE_NAME="$HOST-$DATE"
+CHATID=$(cat /etc/data/chatid)
+TOKEN=$(cat /etc/data/token)
+
+# Telegram settings
+CHAT_ID="$CHATID"
+BOT_TOKEN="$TOKEN"
+
+# Directories that have to be backed up
+OPT="/opt/marzban"
+VAR_LIB="/var/lib/marzban"
+
+mkdir -p ${BACKUP_DIR}
+cd ${DOCKER_COMPOSE_PATH}
+
+# echo "Backup mysql"
+# docker compose exec -T mysql /bin/bash -c 'MYSQL_PWD=${MYSQL_ROOT_PASSWORD} mysqldump -u root marzban' > "$BACKUP_DIR/$FILE_NAME".sql
+
+
+echo "Backup files and directories"
+
+# Create empty archive
+tar -cf $BACKUP_DIR/$FILE_NAME.tar --files-from /dev/null
+
+# Append archive with directories
+tar -rf $BACKUP_DIR/$FILE_NAME.tar --absolute-names $OPT
+tar -rf $BACKUP_DIR/$FILE_NAME.tar --absolute-names $VAR_LIB
+
+echo "Compress archive"
+gzip $BACKUP_DIR/$FILE_NAME.tar
+
+echo "Send file"
+curl -F chat_id="$CHAT_ID" -F document=@"$BACKUP_DIR/$FILE_NAME.tar.gz" https://api.telegram.org/bot$BOT_TOKEN/sendDocument
+
+echo ""
+echo "File is sent"
+echo "Deleted backup directory"
+rm -rf ${BACKUP_DIR}

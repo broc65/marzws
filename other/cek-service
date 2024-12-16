@@ -1,0 +1,77 @@
+#!/bin/bash
+clear
+neofetch --ascii_distro Arcolinux_small
+# // Code for service
+export RED='\033[0;31m';
+export GREEN='\033[0;32m';
+export YELLOW='\033[0;33m';
+export BLUE='\033[0;34m';
+export PURPLE='\033[0;35m';
+export CYAN='\033[0;36m';
+export LIGHT='\033[0;37m';
+export NC='\033[0m';
+
+# // Export Banner Status Information
+export ERROR="[${RED} ERROR ${NC}]";
+export INFO="[${YELLOW} INFO ${NC}]";
+export OKEY="[${GREEN} OKEY ${NC}]";
+export PENDING="[${YELLOW} PENDING ${NC}]";
+export SEND="[${YELLOW} SEND ${NC}]";
+export RECEIVE="[${YELLOW} RECEIVE ${NC}]";
+
+# // DOCKER
+if systemctl is-active --quiet docker; then
+    DOCKER="${GREEN}ON${NC}";
+else
+    DOCKER="${RED}OFF${NC}";
+fi
+
+# // UFW
+if systemctl is-active --quiet ufw; then
+    UFW="${GREEN}ON${NC}";
+else
+    UFW="${RED}OFF${NC}";
+fi
+
+# // PANEL
+if [[ $(netstat -ntlp | grep -i python | grep -i 127.0.0.1:7879 | awk '{print $4}' | cut -d: -f2 | xargs | sed -e 's/ /, /g') == '7879' ]]; then
+    PANEL="${GREEN}ON${NC}";
+else
+    PANEL="${RED}OFF${NC}";
+fi
+
+# // NGINX
+if [[ $(docker inspect --format '{{.State.Status}}' marzban-nginx-1) == "running" ]]; then
+    NGINX="${GREEN}ON${NC}"
+else
+    NGINX="${RED}OFF${NC}"
+fi
+
+# // HTTP
+if [[ $(netstat -ntlp | grep -i xray | grep -i :::80 | awk '{print $4}' | cut -c4-6 | xargs | sed -e 's/ /, /g') == '80' ]]; then
+    HTTP="${GREEN}ON${NC}";
+else
+    HTTP="${RED}OFF${NC}";
+fi
+
+# // HTTPS
+if [[ $(netstat -ntlp | grep -i xray | grep -i :::443 | awk '{print $4}' | cut -c4-6 | xargs | sed -e 's/ /, /g') == '443' ]]; then
+    HTTPS="${GREEN}ON${NC}";
+else
+    HTTPS="${RED}OFF${NC}";
+fi
+
+echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+echo -e "\E[44;1;39m            » Service Information «             \E[0m"
+echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+echo -e "❇️ HTTP                 :  $HTTP"
+echo -e "❇️ HTTPS                :  $HTTPS"
+echo -e "❇️ NGINX                :  $NGINX"
+echo -e "❇️ Docker               :  $DOCKER"
+echo -e "❇️ Firewall             :  $UFW"
+echo -e "❇️ Marzban Panel        :  $PANEL"
+echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+echo -e "\E[44;1;39m   » Don't be sad; indeed Allah is with us «    \E[0m"
+echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+echo ""
+
